@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="PepEducation — evidence-focused peptide and bioregulator education." />
+  <title>PepEducation | Peptide Science, Clearly Explained</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="PepEducation home">
+      <span class="brand-mark">P</span>
+      <span>PepEducation</span>
+    </a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="#library">Peptides</a>
+      <a href="#categories">Categories</a>
+      <a href="#calculators">Calculators</a>
+      <a href="#evidence">Clinical Evidence</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Independent educational platform</p>
+        <h1>Peptide science,<br /><span>clearly explained.</span></h1>
+        <p class="hero-text">Explore mechanisms, clinical evidence, safety profiles and development status across peptides, bioregulators and emerging metabolic compounds.</p>
+        <form class="search-box" role="search" onsubmit="return false;">
+          <input id="searchInput" type="search" placeholder="Search peptides, receptors or conditions..." aria-label="Search the library" />
+          <button type="button" id="searchButton">Search library</button>
+        </form>
+        <div class="hero-links">
+          <a href="#library">Browse the library →</a>
+          <a href="#calculators">Open calculators →</a>
+        </div>
+      </div>
+      <aside class="evidence-card" aria-label="Evidence overview">
+        <div class="orb"></div>
+        <p class="eyebrow">Evidence snapshot</p>
+        <h2>From mechanism to clinical phase</h2>
+        <div class="metric-grid">
+          <div><strong>15</strong><span>initial profiles</span></div>
+          <div><strong>8</strong><span>research classes</span></div>
+          <div><strong>5</strong><span>evidence levels</span></div>
+          <div><strong>1</strong><span>clear standard</span></div>
+        </div>
+        <p class="fine-print">Educational content only. Not medical advice and not intended to diagnose, treat, cure or prevent disease.</p>
+      </aside>
+    </section>
+
+    <section class="trust-strip" aria-label="Platform values">
+      <span>Evidence-first</span><span>Source-linked</span><span>Regularly reviewed</span><span>Plain-language summaries</span>
+    </section>
+
+    <section id="categories" class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">Explore by field</p><h2>Research categories</h2></div>
+        <p>Navigate the library by scientific focus, not marketing claims.</p>
+      </div>
+      <div class="category-grid">
+        <article><span>01</span><h3>Metabolic</h3><p>GLP-1, GIP, glucagon and amylin pathways.</p></article>
+        <article><span>02</span><h3>Growth hormone axis</h3><p>GHRH analogs and secretagogues.</p></article>
+        <article><span>03</span><h3>Repair & recovery</h3><p>Tissue-repair research and regenerative signaling.</p></article>
+        <article><span>04</span><h3>Mitochondrial</h3><p>Cellular energy, stress response and metabolism.</p></article>
+        <article><span>05</span><h3>Neurobiology</h3><p>Cognitive and neuroprotective research compounds.</p></article>
+        <article><span>06</span><h3>Skin & hair</h3><p>Copper peptides and cosmetic research.</p></article>
+      </div>
+    </section>
+
+    <section id="library" class="section library-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">Initial scientific library</p><h2>Featured molecules</h2></div>
+        <p id="resultCount">15 profiles indexed</p>
+      </div>
+      <div id="moleculeGrid" class="molecule-grid">
+        <a class="molecule-card" href="peptides/retatrutide.html" data-search="retatrutide metabolic glp-1 gip glucagon phase 3"><span>Phase III</span><h3>Retatrutide</h3><p>Triple agonist targeting GIP, GLP-1 and glucagon receptors.</p><small>Open profile →</small></a>
+        <article class="molecule-card" data-search="tirzepatide metabolic glp-1 gip approved"><span>Approved</span><h3>Tirzepatide</h3><p>Dual GIP and GLP-1 receptor agonist.</p><small>Profile queued</small></article>
+        <article class="molecule-card" data-search="semaglutide metabolic glp-1 approved"><span>Approved</span><h3>Semaglutide</h3><p>Long-acting GLP-1 receptor agonist.</p><small>Profile queued</small></article>
+        <article class="molecule-card" data-search="survodutide metabolic glp-1 glucagon clinical"><span>Clinical</span><h3>Survodutide</h3><p>Dual GLP-1 and glucagon receptor agonist.</p><small>Profile queued</small></article>
+        <article class="molecule-card" data-search="tesamorelin growth hormone ghrh approved"><span>Approved</span><h3>Tesamorelin</h3><p>GHRH analog studied in the growth-hormone axis.</p><small>Profile queued</small></article>
+        <article class="molecule-card" data-search="cjc-1295 growth hormone ghrh experimental"><span>Experimental</span><h3>CJC-1295</h3><p>Long-acting GHRH analog research compound.</p><small>Profile queued</small></article>
+        <article class="molecule-card" data-search="ipamorelin growth hormone ghrelin secretagogue experimental"><span>Experimental</span><h3>Ipamorelin</h3><p>Selective ghrelin receptor agonist and GH secretagogue.</p><small>Profile queued</small></article>
+        <article class="molecule-card" data-search="ghk-cu copper skin hair cosmetic"><span>Research</span><h3>GHK-Cu</h3><p>Copper-binding tripeptide studied in tissue and skin biology.</p><small>Profile queued</small></article>
+        <article class="molecule-card" data-search="bpc-157 repair recovery preclinical"><span>Preclinical</span><h3>BPC-157</h3><p>Experimental peptide with primarily preclinical evidence.</p><small>Profile queued</small></article>
+      </div>
+    </section>
+
+    <section id="evidence" class="section evidence-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">A clearer evidence standard</p><h2>Know what the data actually supports</h2></div>
+      </div>
+      <div class="evidence-scale">
+        <div><b>1</b><h3>Preclinical</h3><p>Cell or animal research.</p></div>
+        <div><b>2</b><h3>Phase I</h3><p>Initial human safety.</p></div>
+        <div><b>3</b><h3>Phase II</h3><p>Dose and early efficacy.</p></div>
+        <div><b>4</b><h3>Phase III</h3><p>Large confirmatory trials.</p></div>
+        <div><b>5</b><h3>Approved</h3><p>Authorized for a defined indication.</p></div>
+      </div>
+    </section>
+
+    <section id="calculators" class="section calculator-preview">
+      <div><p class="eyebrow">Tools in development</p><h2>Calculators designed for clarity</h2><p>Reconstitution, concentration, unit conversion and vial planning—each with transparent formulas and educational safeguards.</p></div>
+      <div class="tool-list"><span>Reconstitution</span><span>mg ↔ mcg</span><span>Vial planning</span><span>Concentration</span></div>
+    </section>
+  </main>
+
+  <footer id="about">
+    <div><strong>PepEducation</strong><p>Evidence-focused education on peptides and emerging compounds.</p></div>
+    <p>For educational and research-information purposes only.</p>
+  </footer>
+  <script src="assets/app.js"></script>
+</body>
+</html>
