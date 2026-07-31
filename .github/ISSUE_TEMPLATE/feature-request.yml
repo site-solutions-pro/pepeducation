@@ -1,0 +1,74 @@
+name: Feature request
+description: Propose a scoped platform, content-discovery, accessibility, or developer-experience improvement.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: input
+    id: objective
+    attributes:
+      label: Objective
+      description: What user or platform outcome should this feature achieve?
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and evidence
+      description: Describe the current limitation, affected users, and supporting observations.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe behavior, scope, and progressive-enhancement fallback. The current static stack must remain unless migration is explicitly approved.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: Use a checklist of observable outcomes.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Primary area
+      options:
+        - Content discovery or taxonomy
+        - Health Hub
+        - Laboratory Hub or biomarkers
+        - Search
+        - Localization
+        - Accessibility or UX
+        - SEO or structured data
+        - Performance
+        - AI Advisor
+        - Accounts, dashboards, or premium
+        - Device or health-data integration
+        - Developer experience or CI
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Cross-cutting impact
+      description: Address scientific/safety, accessibility, SEO/URLs/sitemap, performance, privacy/security, localization, and mobile behavior as applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies, risks, and rollout
+      description: Note approvals, external services, migrations, feature flags, backward compatibility, and rollback approach.
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Readiness
+      options:
+        - label: The request is a defined task rather than a broad roadmap aspiration.
+          required: true
+        - label: The proposal preserves the current stack, or explicitly identifies migration approval as a prerequisite.
+          required: true

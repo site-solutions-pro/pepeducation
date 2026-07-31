@@ -1,0 +1,9 @@
+# Default ownership for all code, content, workflows, and governance.
+* @site-solutions-pro
+
+# Make high-risk scientific publishing and automation changes explicit in review.
+/peptides/ @site-solutions-pro
+/sitemap.xml @site-solutions-pro
+/.github/ @site-solutions-pro
+/AGENTS.md @site-solutions-pro
+/ROADMAP.md @site-solutions-pro

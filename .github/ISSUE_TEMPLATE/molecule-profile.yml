@@ -1,0 +1,96 @@
+name: Molecule profile
+description: Propose a new or substantially revised evidence-based molecule profile.
+title: "[Molecule]: "
+labels: ["content", "molecule-profile", "scientific-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for educational profiles only. Do not include dosing, reconstitution, treatment cycles, sourcing, self-medication, or individualized treatment advice.
+  - type: input
+    id: molecule
+    attributes:
+      label: Molecule or compound name
+      placeholder: e.g., Survodutide
+    validations:
+      required: true
+  - type: input
+    id: task_objective
+    attributes:
+      label: Objective
+      description: Define the publishable outcome and intended audience.
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence_stage
+    attributes:
+      label: Best-supported evidence stage
+      options:
+        - Preclinical only or predominantly preclinical
+        - Early human evidence
+        - Phase II
+        - Phase III
+        - Approved for at least one indication/jurisdiction
+        - Unclear — verification required
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Primary and official sources
+      description: Provide DOI, PMID, registry ID, regulator URL, label, jurisdiction, and relevant dates. Promotional sources are not accepted as evidence.
+      placeholder: One source per line, with the claim or section it supports.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence_boundaries
+    attributes:
+      label: Evidence boundaries and uncertainty
+      description: Separate human from preclinical findings and identify missing PK/PD, safety, efficacy, or long-term data.
+    validations:
+      required: true
+  - type: textarea
+    id: regulation
+    attributes:
+      label: Regulatory and safety context
+      description: State jurisdiction, status, official source, verification date, known warnings, and important unknowns.
+    validations:
+      required: true
+  - type: textarea
+    id: taxonomy
+    attributes:
+      label: Class, pathways, and categories
+      description: List supported class, receptors/pathways, and proposed categories.
+      placeholder: "Class: ...\nPathways: ...\nCategories: ..."
+    validations:
+      required: true
+  - type: textarea
+    id: discovery
+    attributes:
+      label: Discovery and related content
+      description: Identify proposed URL, homepage/category placement, related molecules, internal links, and sitemap impact.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      value: |
+        - [ ] Follows the molecule profile contract in AGENTS.md
+        - [ ] Uses original writing and verifiable primary/official sources
+        - [ ] Separates human, preclinical, and theoretical evidence
+        - [ ] Includes dated regulatory status, limitations, review date, and educational disclaimer
+        - [ ] Includes complete metadata, appropriate JSON-LD, breadcrumb, and accessible internal links
+        - [ ] Updates discovery, related molecules, and sitemap where applicable
+        - [ ] Passes repository quality checks
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety_confirmation
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: This request contains no dosing, reconstitution, cycle, sourcing, self-medication, or individualized treatment instructions.
+          required: true
+        - label: I have not represented an investigational compound as proven safe or effective.
+          required: true

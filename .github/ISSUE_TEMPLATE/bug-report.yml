@@ -1,0 +1,74 @@
+name: Bug report
+description: Report a reproducible defect, broken page, content-integrity issue, or regression.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Affected URL or file
+      placeholder: https://site-solutions-pro.github.io/pepeducation/...
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Explain what is wrong and its user impact.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Critical — safety, privacy, or site-wide outage
+        - High — scientific misinformation, inaccessible core path, or broken public page
+        - Medium — significant degraded behavior with a workaround
+        - Low — minor or cosmetic defect
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include device, OS, browser/version, viewport, assistive technology, locale, and connection conditions where relevant.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots, logs, or scientific sources
+      description: Remove secrets and personal/health data. For scientific or regulatory defects, provide primary or official sources and verification dates.
+  - type: textarea
+    id: regression
+    attributes:
+      label: Regression and scope notes
+      description: State when this last worked, suspected change, related pages, internal links, sitemap, assets, or structured-data impact.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Data safety
+      options:
+        - label: I removed credentials and personal, health, laboratory, payment, and other sensitive data from this report.
+          required: true

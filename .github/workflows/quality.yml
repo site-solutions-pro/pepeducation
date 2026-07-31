@@ -1,0 +1,140 @@
+name: Quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Static site integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check whitespace errors
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git diff --check "${{ github.event.pull_request.base.sha }}...HEAD"
+          else
+            git diff --check HEAD^ HEAD
+          fi
+
+      - name: Validate HTML
+        run: npx --yes html-validate@10.4.0 "index.html" "peptides/**/*.html"
+
+      - name: Validate sitemap, JSON-LD, internal links, and assets
+        shell: python
+        run: |
+          import json
+          import sys
+          import xml.etree.ElementTree as ET
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import unquote, urlsplit
+
+          root = Path.cwd().resolve()
+          html_files = sorted(root.glob("*.html")) + sorted(root.glob("peptides/**/*.html"))
+          errors = []
+
+          class PageParser(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.ids = set()
+                  self.refs = []
+                  self.json_ld = []
+                  self._json_parts = None
+
+              def handle_starttag(self, tag, attrs):
+                  values = dict(attrs)
+                  if values.get("id"):
+                      self.ids.add(values["id"])
+                  attribute = "href" if tag in {"a", "link"} else "src" if tag in {"img", "script"} else None
+                  if attribute and values.get(attribute):
+                      self.refs.append((tag, values[attribute]))
+                  if tag == "script" and values.get("type", "").lower() == "application/ld+json":
+                      self._json_parts = []
+
+              def handle_data(self, data):
+                  if self._json_parts is not None:
+                      self._json_parts.append(data)
+
+              def handle_endtag(self, tag):
+                  if tag == "script" and self._json_parts is not None:
+                      self.json_ld.append("".join(self._json_parts))
+                      self._json_parts = None
+
+          pages = {}
+          for path in html_files:
+              parser = PageParser()
+              try:
+                  parser.feed(path.read_text(encoding="utf-8"))
+              except Exception as exc:
+                  errors.append(f"{path.relative_to(root)}: HTML parse error: {exc}")
+              pages[path.resolve()] = parser
+              for index, payload in enumerate(parser.json_ld, 1):
+                  try:
+                      data = json.loads(payload)
+                      if not isinstance(data, (dict, list)):
+                          raise ValueError("top level must be an object or array")
+                  except Exception as exc:
+                      errors.append(f"{path.relative_to(root)}: JSON-LD block {index}: {exc}")
+
+          ignored_schemes = {"data", "mailto", "tel", "javascript"}
+          for source, parser in pages.items():
+              for tag, reference in parser.refs:
+                  parsed = urlsplit(reference)
+                  if parsed.scheme in {"http", "https"} or parsed.scheme in ignored_schemes or parsed.netloc:
+                      continue
+                  target = source if not parsed.path else (source.parent / unquote(parsed.path)).resolve()
+                  try:
+                      target.relative_to(root)
+                  except ValueError:
+                      errors.append(f"{source.relative_to(root)}: reference escapes repository: {reference}")
+                      continue
+                  if not target.exists():
+                      errors.append(f"{source.relative_to(root)}: missing {tag} target: {reference}")
+                      continue
+                  if parsed.fragment and target.suffix.lower() == ".html":
+                      target_parser = pages.get(target)
+                      if target_parser is None:
+                          target_parser = PageParser()
+                          target_parser.feed(target.read_text(encoding="utf-8"))
+                          pages[target] = target_parser
+                      if unquote(parsed.fragment) not in target_parser.ids:
+                          errors.append(f"{source.relative_to(root)}: missing fragment: {reference}")
+
+          sitemap = root / "sitemap.xml"
+          try:
+              tree = ET.parse(sitemap)
+              namespace = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+              locations = [node.text for node in tree.findall("sm:url/sm:loc", namespace)]
+              if not locations or any(not location or not location.startswith("https://") for location in locations):
+                  errors.append("sitemap.xml: every URL requires an absolute HTTPS <loc>")
+              if len(locations) != len(set(locations)):
+                  errors.append("sitemap.xml: duplicate <loc> entries")
+          except Exception as exc:
+              errors.append(f"sitemap.xml: XML validation failed: {exc}")
+
+          if errors:
+              print("\n".join(f"ERROR: {error}" for error in errors), file=sys.stderr)
+              raise SystemExit(1)
+          print(f"Validated {len(html_files)} HTML files and sitemap.xml")
