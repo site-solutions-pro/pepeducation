@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://site-solutions-pro.github.io/pepeducation/sitemap.xml

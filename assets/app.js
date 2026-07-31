@@ -44,6 +44,11 @@
     }
   };
 
+  const publishedProfiles = {
+    tirzepatide: 'peptides/tirzepatide.html',
+    semaglutide: 'peptides/semaglutide.html'
+  };
+
   if (menuButton && navigation) {
     menuButton.addEventListener('click', () => {
       const isOpen = navigation.classList.toggle('open');
@@ -82,6 +87,27 @@
 
   audienceButtons.forEach((button) => button.addEventListener('click', () => setAudience(button.dataset.audienceSelect)));
   setAudience(localStorage.getItem('pepeducation-audience') || document.body.dataset.audience || 'beginner');
+
+  cards.forEach((card) => {
+    if (card instanceof HTMLAnchorElement) return;
+    const name = card.querySelector('h3')?.textContent?.trim().toLowerCase();
+    const target = name ? publishedProfiles[name] : null;
+    if (!target) return;
+    card.classList.add('is-published');
+    card.tabIndex = 0;
+    card.setAttribute('role', 'link');
+    card.setAttribute('aria-label', `Open ${name} profile`);
+    const status = card.querySelector('small');
+    if (status) status.textContent = 'Open profile →';
+    const openProfile = () => window.location.assign(target);
+    card.addEventListener('click', openProfile);
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openProfile();
+      }
+    });
+  });
 
   const normalize = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   const filterLibrary = () => {
