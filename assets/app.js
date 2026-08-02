@@ -53,4 +53,66 @@
 
   searchInput?.addEventListener('input', applyFilters);
   applyFilters();
+
+  const slides = Array.from(document.querySelectorAll('.highlight-slide'));
+  const dots = Array.from(document.querySelectorAll('[data-carousel-dot]'));
+  const previous = document.querySelector('.carousel-arrow.previous');
+  const next = document.querySelector('.carousel-arrow.next');
+  const carousel = document.querySelector('.highlights-carousel');
+  let currentSlide = 0;
+  let carouselTimer;
+
+  const showSlide = (index) => {
+    if (!slides.length) return;
+    currentSlide = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      const active = slideIndex === currentSlide;
+      slide.hidden = !active;
+      slide.classList.toggle('active', active);
+    });
+    dots.forEach((dot, dotIndex) => {
+      const active = dotIndex === currentSlide;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-pressed', String(active));
+    });
+  };
+
+  const stopCarousel = () => window.clearInterval(carouselTimer);
+  const startCarousel = () => {
+    stopCarousel();
+    if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      carouselTimer = window.setInterval(() => showSlide(currentSlide + 1), 6500);
+    }
+  };
+
+  previous?.addEventListener('click', () => { showSlide(currentSlide - 1); startCarousel(); });
+  next?.addEventListener('click', () => { showSlide(currentSlide + 1); startCarousel(); });
+  dots.forEach((dot) => dot.addEventListener('click', () => { showSlide(Number(dot.dataset.carouselDot)); startCarousel(); }));
+  carousel?.addEventListener('mouseenter', stopCarousel);
+  carousel?.addEventListener('mouseleave', startCarousel);
+  carousel?.addEventListener('focusin', stopCarousel);
+  carousel?.addEventListener('focusout', startCarousel);
+  showSlide(0);
+  startCarousel();
+
+  const exploreInput = document.querySelector('#exploreSearch');
+  const exploreButton = document.querySelector('#exploreSearchButton');
+  const exploreCards = Array.from(document.querySelectorAll('[data-explore]'));
+  const exploreCount = document.querySelector('#exploreResultCount');
+
+  const filterExplore = () => {
+    const term = normalize(exploreInput?.value ?? '');
+    let visible = 0;
+    exploreCards.forEach((card) => {
+      const value = normalize(card.getAttribute('data-explore') ?? card.textContent ?? '');
+      const matches = !term || value.includes(term);
+      card.classList.toggle('hidden', !matches);
+      if (matches) visible += 1;
+    });
+    if (exploreCount) exploreCount.textContent = `${visible} ${visible === 1 ? 'area' : 'areas'}`;
+  };
+
+  exploreInput?.addEventListener('input', filterExplore);
+  exploreButton?.addEventListener('click', filterExplore);
+  filterExplore();
 })();
