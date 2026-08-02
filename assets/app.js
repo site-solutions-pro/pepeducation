@@ -9,12 +9,61 @@
       menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
     });
     navigation.addEventListener('click', (event) => {
-      if (event.target instanceof HTMLAnchorElement) {
+      if (event.target instanceof HTMLAnchorElement && !event.target.closest('[data-language-menu]')) {
         navigation.classList.remove('open');
         menuButton.setAttribute('aria-expanded', 'false');
       }
     });
   }
+
+  const languageMenus = Array.from(document.querySelectorAll('[data-language-menu]'));
+  languageMenus.forEach((menu) => {
+    const button = menu.querySelector('.language-button');
+    const dropdown = menu.querySelector('.language-dropdown');
+    if (!button || !dropdown) return;
+
+    const closeMenu = () => {
+      dropdown.hidden = true;
+      button.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('open');
+    };
+
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = dropdown.hidden;
+      languageMenus.forEach((otherMenu) => {
+        if (otherMenu === menu) return;
+        const otherButton = otherMenu.querySelector('.language-button');
+        const otherDropdown = otherMenu.querySelector('.language-dropdown');
+        if (otherButton && otherDropdown) {
+          otherDropdown.hidden = true;
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherMenu.classList.remove('open');
+        }
+      });
+      dropdown.hidden = !willOpen;
+      button.setAttribute('aria-expanded', String(willOpen));
+      menu.classList.toggle('open', willOpen);
+    });
+
+    dropdown.querySelectorAll('[data-language]').forEach((link) => {
+      link.addEventListener('click', () => {
+        try { window.localStorage.setItem('wellmax-language', link.dataset.language || 'en'); } catch (_) {}
+        closeMenu();
+      });
+    });
+
+    menu.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+        button.focus();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!menu.contains(event.target)) closeMenu();
+    });
+  });
 
   const searchInput = document.querySelector('#librarySearch');
   const resultCount = document.querySelector('#resultCount');
