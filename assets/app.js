@@ -1,4 +1,83 @@
 (() => {
+  const path = window.location.pathname;
+  const locale = path.includes('/pt/') ? 'pt' : path.includes('/es/') ? 'es' : 'en';
+  const isLocalized = locale !== 'en';
+  const root = isLocalized ? '../' : '';
+
+  const labels = {
+    en: {
+      nav: 'Primary navigation',
+      explore: 'Explore',
+      library: 'Research Library',
+      biomarkers: 'Biomarkers',
+      comparisons: 'Comparisons',
+      membership: 'Membership',
+      open: 'Open navigation',
+      close: 'Close navigation',
+      language: 'Select language'
+    },
+    pt: {
+      nav: 'Navegação principal',
+      explore: 'Explorar',
+      library: 'Biblioteca',
+      biomarkers: 'Biomarcadores',
+      comparisons: 'Comparações',
+      membership: 'Assinatura',
+      open: 'Abrir navegação',
+      close: 'Fechar navegação',
+      language: 'Selecionar idioma'
+    },
+    es: {
+      nav: 'Navegación principal',
+      explore: 'Explorar',
+      library: 'Biblioteca',
+      biomarkers: 'Biomarcadores',
+      comparisons: 'Comparaciones',
+      membership: 'Membresía',
+      open: 'Abrir navegación',
+      close: 'Cerrar navegación',
+      language: 'Seleccionar idioma'
+    }
+  }[locale];
+
+  const currentFile = path.endsWith('/') ? 'index.html' : path.split('/').pop();
+  const activeAttr = (file) => currentFile === file ? ' aria-current="page"' : '';
+  const homeHref = locale === 'pt' ? './' : locale === 'es' ? './' : 'index.html';
+  const languageHref = {
+    en: locale === 'en' ? './' : '../',
+    pt: locale === 'pt' ? './' : locale === 'es' ? '../pt/' : 'pt/',
+    es: locale === 'es' ? './' : locale === 'pt' ? '../es/' : 'es/'
+  };
+
+  const existingHeader = document.querySelector('.site-header');
+  if (existingHeader) {
+    existingHeader.innerHTML = `
+      <a class="brand" href="${homeHref}" aria-label="WellMax Education home">
+        <span class="brand-mark">W</span><span>WellMax Education</span>
+      </a>
+      <nav class="main-nav" aria-label="${labels.nav}">
+        <a href="${root}explore.html"${activeAttr('explore.html')}>${labels.explore}</a>
+        <a href="${root}library.html"${activeAttr('library.html')}>${labels.library}</a>
+        <a href="${root}biomarkers.html"${activeAttr('biomarkers.html')}>${labels.biomarkers}</a>
+        <a href="${root}comparisons.html"${activeAttr('comparisons.html')}>${labels.comparisons}</a>
+        <a href="${root}membership.html"${activeAttr('membership.html')}>${labels.membership}</a>
+      </nav>
+      <div class="header-actions">
+        <div class="language-menu" data-language-menu>
+          <button class="language-button" type="button" aria-expanded="false" aria-haspopup="true" aria-label="${labels.language}">
+            <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9S14.4 18.5 12 21M12 3C9.6 5.5 8.4 8.5 8.4 12S9.6 18.5 12 21"></path></svg>
+            <span>${locale.toUpperCase()}</span><span aria-hidden="true">▾</span>
+          </button>
+          <div class="language-dropdown" role="menu" hidden>
+            <a class="${locale === 'en' ? 'active' : ''}" href="${languageHref.en}" data-language="en" role="menuitem">🇺🇸 English</a>
+            <a class="${locale === 'pt' ? 'active' : ''}" href="${languageHref.pt}" data-language="pt" role="menuitem">🇧🇷 Português</a>
+            <a class="${locale === 'es' ? 'active' : ''}" href="${languageHref.es}" data-language="es" role="menuitem">🇪🇸 Español</a>
+          </div>
+        </div>
+        <button class="menu-toggle" type="button" aria-label="${labels.open}" aria-expanded="false">☰</button>
+      </div>`;
+  }
+
   const menuButton = document.querySelector('.menu-toggle');
   const navigation = document.querySelector('.main-nav');
 
@@ -6,10 +85,10 @@
     menuButton.addEventListener('click', () => {
       const isOpen = navigation.classList.toggle('open');
       menuButton.setAttribute('aria-expanded', String(isOpen));
-      menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      menuButton.setAttribute('aria-label', isOpen ? labels.close : labels.open);
     });
     navigation.addEventListener('click', (event) => {
-      if (event.target instanceof HTMLAnchorElement && !event.target.closest('[data-language-menu]')) {
+      if (event.target instanceof HTMLAnchorElement) {
         navigation.classList.remove('open');
         menuButton.setAttribute('aria-expanded', 'false');
       }
@@ -31,16 +110,6 @@
     button.addEventListener('click', (event) => {
       event.stopPropagation();
       const willOpen = dropdown.hidden;
-      languageMenus.forEach((otherMenu) => {
-        if (otherMenu === menu) return;
-        const otherButton = otherMenu.querySelector('.language-button');
-        const otherDropdown = otherMenu.querySelector('.language-dropdown');
-        if (otherButton && otherDropdown) {
-          otherDropdown.hidden = true;
-          otherButton.setAttribute('aria-expanded', 'false');
-          otherMenu.classList.remove('open');
-        }
-      });
       dropdown.hidden = !willOpen;
       button.setAttribute('aria-expanded', String(willOpen));
       menu.classList.toggle('open', willOpen);
@@ -65,13 +134,12 @@
     });
   });
 
+  const normalize = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   const searchInput = document.querySelector('#librarySearch');
   const resultCount = document.querySelector('#resultCount');
   const cards = Array.from(document.querySelectorAll('[data-search]'));
   const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
   let activeFilter = 'all';
-
-  const normalize = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 
   const applyFilters = () => {
     const term = normalize(searchInput?.value ?? '');
@@ -79,9 +147,7 @@
     cards.forEach((card) => {
       const searchableText = normalize(card.getAttribute('data-search') ?? card.textContent ?? '');
       const category = card.getAttribute('data-category') ?? 'all';
-      const matchesTerm = !term || searchableText.includes(term);
-      const matchesCategory = activeFilter === 'all' || category === activeFilter;
-      const matches = matchesTerm && matchesCategory;
+      const matches = (!term || searchableText.includes(term)) && (activeFilter === 'all' || category === activeFilter);
       card.classList.toggle('hidden', !matches);
       if (matches) visible += 1;
     });
@@ -99,7 +165,6 @@
       applyFilters();
     });
   });
-
   searchInput?.addEventListener('input', applyFilters);
   applyFilters();
 
