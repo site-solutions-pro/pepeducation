@@ -26,10 +26,18 @@ jobs:
           from pathlib import Path
           from urllib.parse import unquote
           import json
+          import os
+          import subprocess
           import xml.etree.ElementTree as ET
 
           root = Path('.')
           errors = []
+          base_ref = os.environ.get('GITHUB_BASE_REF', 'main')
+          try:
+              changed = subprocess.check_output(['git','diff','--name-only',f'origin/{base_ref}...HEAD'], text=True).splitlines()
+          except Exception:
+              changed = []
+          changed_html = {Path(p) for p in changed if p.endswith('.html')}
 
           sitemap = root / 'sitemap.xml'
           try:
@@ -77,19 +85,15 @@ jobs:
                   if tag == 'script' and a.get('type') == 'application/ld+json':
                       self._jsonld = True
                       self._buf = []
-                  if tag == 'title':
-                      self.title_count += 1
-                  if tag == 'h1':
-                      self.h1_count += 1
-                  if tag == 'link' and a.get('rel') == 'canonical':
-                      self.canonicals += 1
+                  if tag == 'title': self.title_count += 1
+                  if tag == 'h1': self.h1_count += 1
+                  if tag == 'link' and a.get('rel') == 'canonical': self.canonicals += 1
               def handle_endtag(self, tag):
                   if tag == 'script' and self._jsonld:
                       self._jsonld = False
                       self.jsonld.append(''.join(self._buf))
               def handle_data(self, data):
-                  if self._jsonld:
-                      self._buf.append(data)
+                  if self._jsonld: self._buf.append(data)
 
           html_files = sorted(root.rglob('*.html'))
           parsed = {}
@@ -103,8 +107,8 @@ jobs:
                   continue
               parsed[path] = p
 
-              # Strict structural rules apply to the localized internal release.
-              if path.parent == Path('pt') and path.name != 'index.html':
+              strict = path in changed_html or (path.parent == Path('pt') and path.name != 'index.html')
+              if strict:
                   if not text.lstrip().startswith('<!DOCTYPE html>'):
                       errors.append(f'{path}: missing canonical HTML5 doctype')
                   if p.title_count != 1:
@@ -120,7 +124,6 @@ jobs:
                   except Exception as exc:
                       errors.append(f'{path}: invalid JSON-LD: {exc}')
 
-          # Local link and asset integrity remains global.
           for path, p in parsed.items():
               base = path.parent
               for href in p.links:
@@ -148,7 +151,7 @@ jobs:
           if errors:
               print('\n'.join(f'ERROR: {e}' for e in errors))
               raise SystemExit(1)
-          print(f'Validated {len(html_files)} HTML files and {len(locs)} sitemap URLs successfully.')
+          print(f'Validated {len(html_files)} HTML files, {len(changed_html)} changed HTML files and {len(locs)} sitemap URLs successfully.')
           PY
 
       - name: Check diff whitespace
