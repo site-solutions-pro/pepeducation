@@ -1,0 +1,155 @@
+name: Quality
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check JavaScript syntax
+        run: node --check assets/app.js
+
+      - name: Validate sitemap XML and static HTML integrity
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import unquote
+          import json
+          import xml.etree.ElementTree as ET
+
+          root = Path('.')
+          errors = []
+
+          sitemap = root / 'sitemap.xml'
+          try:
+              tree = ET.parse(sitemap)
+              ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+              locs = [el.text.strip() for el in tree.findall('.//sm:loc', ns) if el.text]
+              if len(locs) != len(set(locs)):
+                  errors.append('sitemap.xml contains duplicate <loc> entries')
+              prefix = 'https://site-solutions-pro.github.io/pepeducation/'
+              for url in locs:
+                  if not url.startswith('https://'):
+                      errors.append(f'non-HTTPS sitemap URL: {url}')
+                  if url.startswith(prefix):
+                      rel = unquote(url[len(prefix):])
+                      target = root / rel
+                      if rel == '' or rel.endswith('/'):
+                          target = target / 'index.html'
+                      if not target.exists():
+                          errors.append(f'sitemap target missing: {url} -> {target}')
+          except Exception as exc:
+              errors.append(f'sitemap.xml parse failure: {exc}')
+              locs = []
+
+          class Parser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = []
+                  self.ids = set()
+                  self.jsonld = []
+                  self._jsonld = False
+                  self._buf = []
+                  self.title_count = 0
+                  self.h1_count = 0
+                  self.canonicals = 0
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  if 'id' in a:
+                      self.ids.add(a['id'])
+                  if tag == 'a' and 'href' in a:
+                      self.links.append(a['href'])
+                  if tag in ('script','link','img'):
+                      key = {'script':'src','link':'href','img':'src'}[tag]
+                      if a.get(key):
+                          self.links.append(a[key])
+                  if tag == 'script' and a.get('type') == 'application/ld+json':
+                      self._jsonld = True
+                      self._buf = []
+                  if tag == 'title':
+                      self.title_count += 1
+                  if tag == 'h1':
+                      self.h1_count += 1
+                  if tag == 'link' and a.get('rel') == 'canonical':
+                      self.canonicals += 1
+              def handle_endtag(self, tag):
+                  if tag == 'script' and self._jsonld:
+                      self._jsonld = False
+                      self.jsonld.append(''.join(self._buf))
+              def handle_data(self, data):
+                  if self._jsonld:
+                      self._buf.append(data)
+
+          html_files = sorted(root.rglob('*.html'))
+          parsed = {}
+          for path in html_files:
+              text = path.read_text(encoding='utf-8')
+              p = Parser()
+              try:
+                  p.feed(text)
+              except Exception as exc:
+                  errors.append(f'{path}: HTML parser failure: {exc}')
+                  continue
+              parsed[path] = p
+
+              # Strict structural rules apply to the localized internal release.
+              if path.parent == Path('pt') and path.name != 'index.html':
+                  if not text.lstrip().startswith('<!DOCTYPE html>'):
+                      errors.append(f'{path}: missing canonical HTML5 doctype')
+                  if p.title_count != 1:
+                      errors.append(f'{path}: expected exactly one <title>, found {p.title_count}')
+                  if p.h1_count != 1:
+                      errors.append(f'{path}: expected exactly one <h1>, found {p.h1_count}')
+                  if p.canonicals != 1:
+                      errors.append(f'{path}: expected exactly one canonical link, found {p.canonicals}')
+
+              for block in p.jsonld:
+                  try:
+                      json.loads(block)
+                  except Exception as exc:
+                      errors.append(f'{path}: invalid JSON-LD: {exc}')
+
+          # Local link and asset integrity remains global.
+          for path, p in parsed.items():
+              base = path.parent
+              for href in p.links:
+                  if not href or href.startswith(('http://','https://','mailto:','tel:','javascript:','data:')):
+                      continue
+                  if href.startswith('#'):
+                      frag = href[1:]
+                      if frag and frag not in p.ids:
+                          errors.append(f'{path}: missing fragment target #{frag}')
+                      continue
+                  clean = href.split('#',1)[0].split('?',1)[0]
+                  if not clean:
+                      continue
+                  target = (base / clean).resolve()
+                  try:
+                      target.relative_to(root.resolve())
+                  except ValueError:
+                      errors.append(f'{path}: local link escapes repository: {href}')
+                      continue
+                  if clean.endswith('/'):
+                      target = target / 'index.html'
+                  if not target.exists():
+                      errors.append(f'{path}: missing local target {href}')
+
+          if errors:
+              print('\n'.join(f'ERROR: {e}' for e in errors))
+              raise SystemExit(1)
+          print(f'Validated {len(html_files)} HTML files and {len(locs)} sitemap URLs successfully.')
+          PY
+
+      - name: Check diff whitespace
+        run: git diff --check origin/${{ github.base_ref }}...HEAD
