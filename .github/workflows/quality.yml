@@ -90,6 +90,36 @@ jobs:
           console.log(`Validated generated navigation for ${cases.length} root and nested locale paths.`);
           JS
 
+      - name: Validate Portuguese homepage localized links
+        run: |
+          node <<'JS'
+          const assert = require('node:assert/strict');
+          const fs = require('node:fs');
+
+          const html = fs.readFileSync('pt/index.html', 'utf8');
+          const expectedCounts = {
+            'explore.html': 2,
+            'library.html': 2,
+            'biomarkers.html': 3,
+            'comparisons.html': 1,
+            'membership.html': 1,
+            'peptides.html': 1,
+            'longevity.html': 2,
+            'metabolism.html': 1,
+            'performance.html': 1,
+            'neuroscience.html': 1
+          };
+
+          for (const [page, expectedCount] of Object.entries(expectedCounts)) {
+            assert.ok(fs.existsSync(`pt/${page}`), `Portuguese equivalent missing: pt/${page}`);
+            const localizedCount = [...html.matchAll(new RegExp(`href="${page}"`, 'g'))].length;
+            assert.equal(localizedCount, expectedCount, `unexpected localized link count for ${page}`);
+            assert.ok(!html.includes(`href="../${page}"`), `Portuguese homepage escapes to English: ../${page}`);
+          }
+
+          console.log('Validated 15 Portuguese homepage links across navigation, CTAs and category cards.');
+          JS
+
       - name: Validate sitemap XML and static HTML integrity
         run: |
           python - <<'PY'
