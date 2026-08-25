@@ -17,7 +17,78 @@ jobs:
           fetch-depth: 0
 
       - name: Check JavaScript syntax
-        run: node --check assets/app.js
+        run: find assets -name '*.js' -print0 | xargs -0 -n1 node --check
+
+      - name: Validate generated navigation paths
+        run: |
+          node <<'JS'
+          const assert = require('node:assert/strict');
+          const fs = require('node:fs');
+          const vm = require('node:vm');
+
+          const source = fs.readFileSync('assets/app.js', 'utf8');
+          const repositoryPath = '/wellmax/';
+          const cases = [
+            ['/wellmax/', 'en', 'index.html'],
+            ['/wellmax/index.html', 'en', 'index.html'],
+            ['/wellmax/peptides/retatrutide.html', 'en', 'peptides/retatrutide.html'],
+            ['/wellmax/biomarkers/hba1c.html', 'en', 'biomarkers/hba1c.html'],
+            ['/wellmax/supplements/omega-3.html', 'en', 'supplements/omega-3.html'],
+            ['/wellmax/pt/', 'pt', 'index.html'],
+            ['/wellmax/pt/peptides/retatrutide.html', 'pt', 'peptides/retatrutide.html'],
+            ['/wellmax/pt/biomarkers/hba1c.html', 'pt', 'biomarkers/hba1c.html'],
+            ['/wellmax/pt/supplements/omega-3.html', 'pt', 'supplements/omega-3.html'],
+            ['/wellmax/es/', 'es', 'index.html'],
+            ['/wellmax/es/peptides/retatrutide.html', 'es', 'peptides/retatrutide.html'],
+            ['/wellmax/es/biomarkers/hba1c.html', 'es', 'biomarkers/hba1c.html'],
+            ['/wellmax/es/supplements/omega-3.html', 'es', 'supplements/omega-3.html']
+          ];
+
+          const pagePath = (locale, page) => {
+            const prefix = locale === 'en' ? '' : `${locale}/`;
+            return `${repositoryPath}${prefix}${page === 'index.html' ? '' : page}`;
+          };
+
+          for (const [pathname, locale, contentPath] of cases) {
+            const header = { innerHTML: '' };
+            const document = {
+              currentScript: { src: 'https://site-solutions-pro.github.io/wellmax/assets/app.js' },
+              querySelector: (selector) => selector === '.site-header' ? header : null,
+              querySelectorAll: () => [],
+              addEventListener: () => {}
+            };
+            const window = {
+              location: { pathname },
+              clearInterval: () => {},
+              setInterval: () => 0,
+              matchMedia: () => ({ matches: true })
+            };
+
+            vm.runInNewContext(source, { URL, document, window, HTMLAnchorElement: class {} });
+
+            const actual = [...header.innerHTML.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
+            const expected = [
+              pagePath(locale, 'index.html'),
+              pagePath(locale, 'explore.html'),
+              pagePath(locale, 'library.html'),
+              pagePath(locale, 'biomarkers.html'),
+              pagePath(locale, 'comparisons.html'),
+              pagePath(locale, 'membership.html'),
+              pagePath('en', contentPath),
+              pagePath('pt', contentPath),
+              pagePath('es', contentPath)
+            ];
+            assert.deepEqual(actual, expected, `generated navigation mismatch for ${pathname}`);
+            for (const href of actual) {
+              assert.ok(href.startsWith(repositoryPath), `navigation escapes repository base: ${href}`);
+              const relative = href.slice(repositoryPath.length);
+              const target = relative === '' || relative.endsWith('/') ? `${relative}index.html` : relative;
+              assert.ok(fs.existsSync(target), `generated navigation target missing: ${href} -> ${target}`);
+            }
+          }
+
+          console.log(`Validated generated navigation for ${cases.length} root and nested locale paths.`);
+          JS
 
       - name: Validate sitemap XML and static HTML integrity
         run: |
@@ -40,26 +111,32 @@ jobs:
           changed_html = {Path(p) for p in changed if p.endswith('.html')}
 
           sitemap = root / 'sitemap.xml'
+          prefix = 'https://site-solutions-pro.github.io/wellmax/'
           try:
               tree = ET.parse(sitemap)
               ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
               locs = [el.text.strip() for el in tree.findall('.//sm:loc', ns) if el.text]
               if len(locs) != len(set(locs)):
                   errors.append('sitemap.xml contains duplicate <loc> entries')
-              prefix = 'https://site-solutions-pro.github.io/pepeducation/'
+              sitemap_targets = set()
               for url in locs:
                   if not url.startswith('https://'):
                       errors.append(f'non-HTTPS sitemap URL: {url}')
-                  if url.startswith(prefix):
-                      rel = unquote(url[len(prefix):])
-                      target = root / rel
-                      if rel == '' or rel.endswith('/'):
-                          target = target / 'index.html'
-                      if not target.exists():
-                          errors.append(f'sitemap target missing: {url} -> {target}')
+                  if not url.startswith(prefix):
+                      errors.append(f'sitemap URL outside production base {prefix}: {url}')
+                      continue
+                  rel = unquote(url[len(prefix):])
+                  target = root / rel
+                  if rel == '' or rel.endswith('/'):
+                      target = target / 'index.html'
+                  if not target.is_file():
+                      errors.append(f'sitemap target missing: {url} -> {target}')
+                  else:
+                      sitemap_targets.add(target.resolve())
           except Exception as exc:
               errors.append(f'sitemap.xml parse failure: {exc}')
               locs = []
+              sitemap_targets = set()
 
           class Parser(HTMLParser):
               def __init__(self):
@@ -96,6 +173,32 @@ jobs:
                   if self._jsonld: self._buf.append(data)
 
           html_files = sorted(root.rglob('*.html'))
+          public_html = {path.resolve() for path in html_files}
+          for path in sorted(public_html - sitemap_targets):
+              errors.append(f'public HTML missing from sitemap.xml: {path.relative_to(root.resolve())}')
+          for path in sorted(sitemap_targets - public_html):
+              errors.append(f'sitemap target is not public HTML: {path.relative_to(root.resolve())}')
+
+          expected_robots_sitemap = f'Sitemap: {prefix}sitemap.xml'
+          robots_lines = [line.strip() for line in (root / 'robots.txt').read_text(encoding='utf-8').splitlines()]
+          robots_sitemaps = [line for line in robots_lines if line.lower().startswith('sitemap:')]
+          if robots_sitemaps != [expected_robots_sitemap]:
+              errors.append(
+                  f'robots.txt must contain exactly {expected_robots_sitemap!r}; found {robots_sitemaps!r}'
+              )
+
+          # Historical and migration documentation is intentionally excluded.
+          # Active browser-delivered source must never point to the retired project URL.
+          stale_production_url = 'site-solutions-pro.github.io/pepeducation/'
+          active_files = [root / 'robots.txt', root / 'sitemap.xml', *html_files]
+          active_files.extend(
+              path for path in (root / 'assets').rglob('*')
+              if path.is_file() and path.suffix.lower() in {'.css', '.js', '.svg'}
+          )
+          for path in active_files:
+              if stale_production_url in path.read_text(encoding='utf-8'):
+                  errors.append(f'active production file contains retired URL: {path}')
+
           parsed = {}
           for path in html_files:
               text = path.read_text(encoding='utf-8')
@@ -107,7 +210,10 @@ jobs:
                   continue
               parsed[path] = p
 
-              strict = path in changed_html or (path.parent == Path('pt') and path.name != 'index.html')
+              dynamic_shell = 'assets/i18n-page.js' in text
+              strict = not dynamic_shell and (
+                  path in changed_html or (path.parent == Path('pt') and path.name != 'index.html')
+              )
               if strict:
                   if not text.lstrip().startswith('<!DOCTYPE html>'):
                       errors.append(f'{path}: missing canonical HTML5 doctype')
