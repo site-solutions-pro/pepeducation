@@ -1,8 +1,19 @@
 (() => {
+  const repositoryBase = new URL('../', document.currentScript.src);
   const path = window.location.pathname;
-  const locale = path.includes('/pt/') ? 'pt' : path.includes('/es/') ? 'es' : 'en';
-  const isLocalized = locale !== 'en';
-  const root = isLocalized ? '../' : '';
+  const pathWithinRepository = path.startsWith(repositoryBase.pathname)
+    ? path.slice(repositoryBase.pathname.length)
+    : path.replace(/^\/+/, '');
+  const pathSegments = pathWithinRepository.split('/').filter(Boolean);
+  const locale = pathSegments[0] === 'pt' || pathSegments[0] === 'es' ? pathSegments[0] : 'en';
+  const contentSegments = locale === 'en' ? pathSegments : pathSegments.slice(1);
+  const contentPath = contentSegments.length ? contentSegments.join('/') : 'index.html';
+
+  const pageHref = (page, targetLocale = locale) => {
+    const localePrefix = targetLocale === 'en' ? '' : `${targetLocale}/`;
+    const pagePath = page === 'index.html' ? '' : page;
+    return new URL(`${localePrefix}${pagePath}`, repositoryBase).pathname;
+  };
 
   const labels = {
     en: {
@@ -40,13 +51,13 @@
     }
   }[locale];
 
-  const currentFile = path.endsWith('/') ? 'index.html' : path.split('/').pop();
+  const currentFile = contentPath.split('/').pop();
   const activeAttr = (file) => currentFile === file ? ' aria-current="page"' : '';
-  const homeHref = locale === 'pt' ? './' : locale === 'es' ? './' : 'index.html';
+  const homeHref = pageHref('index.html');
   const languageHref = {
-    en: locale === 'en' ? './' : '../',
-    pt: locale === 'pt' ? './' : locale === 'es' ? '../pt/' : 'pt/',
-    es: locale === 'es' ? './' : locale === 'pt' ? '../es/' : 'es/'
+    en: pageHref(contentPath, 'en'),
+    pt: pageHref(contentPath, 'pt'),
+    es: pageHref(contentPath, 'es')
   };
 
   const existingHeader = document.querySelector('.site-header');
@@ -56,11 +67,11 @@
         <span class="brand-mark">W</span><span>WellMax Education</span>
       </a>
       <nav class="main-nav" aria-label="${labels.nav}">
-        <a href="${root}explore.html"${activeAttr('explore.html')}>${labels.explore}</a>
-        <a href="${root}library.html"${activeAttr('library.html')}>${labels.library}</a>
-        <a href="${root}biomarkers.html"${activeAttr('biomarkers.html')}>${labels.biomarkers}</a>
-        <a href="${root}comparisons.html"${activeAttr('comparisons.html')}>${labels.comparisons}</a>
-        <a href="${root}membership.html"${activeAttr('membership.html')}>${labels.membership}</a>
+        <a href="${pageHref('explore.html')}"${activeAttr('explore.html')}>${labels.explore}</a>
+        <a href="${pageHref('library.html')}"${activeAttr('library.html')}>${labels.library}</a>
+        <a href="${pageHref('biomarkers.html')}"${activeAttr('biomarkers.html')}>${labels.biomarkers}</a>
+        <a href="${pageHref('comparisons.html')}"${activeAttr('comparisons.html')}>${labels.comparisons}</a>
+        <a href="${pageHref('membership.html')}"${activeAttr('membership.html')}>${labels.membership}</a>
       </nav>
       <div class="header-actions">
         <div class="language-menu" data-language-menu>
