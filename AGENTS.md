@@ -1,340 +1,209 @@
-# PepEducation Agent Operating Manual
-## 1. Mission
-PepEducation is an evidence-based scientific education platform covering:
+# WellMax Agent Operating System v1
 
-- Peptides.
-- Metabolism.
-- Longevity.
-- Neuroscience.
-- Performance.
-- Health.
-- Evidence-based biohacking.
+## 1. Authority and scope
 
-PepEducation provides education, not medical diagnosis, prescribing, or treatment services.
-Never present the platform as a substitute for qualified medical care.
+This file governs all agent work in `site-solutions-pro/wellmax`. More specific `AGENTS.md` files add requirements for their directories. They may tighten but never weaken this manual or `docs/WELLMAX_CONSTITUTION.md`.
 
-Core goals are:
+Apply instructions in this order:
 
-- Scientific accuracy.
-- Original content.
-- Discoverability.
-- Accessibility.
-- Performance.
-- Scalable architecture.
-- Multilingual readiness.
-## 2. Current Architecture
-The production stack is:
+1. Safety and explicit maintainer instructions.
+2. `docs/WELLMAX_CONSTITUTION.md`.
+3. This root manual.
+4. The nearest applicable subdirectory `AGENTS.md`.
+5. The standards in `docs/`.
+6. Existing implementation conventions and task-specific plans.
 
-- HTML5 for page structure and content.
-- Modern CSS in `assets/styles.css` for presentation and responsive layout.
-- JavaScript ES6 in `assets/app.js` for progressive interaction.
-- GitHub Pages for static hosting and deployment.
+If two requirements remain incompatible, stop before the irreversible action, record the conflict, and request maintainer direction.
 
-Repository structure:
+## 2. Fixed repository facts
 
-- `index.html` is the homepage and primary discovery surface.
-- `peptides/` contains public molecule profiles.
-- `assets/` contains shared CSS and JavaScript.
-- `sitemap.xml` enumerates indexable public URLs.
-- `robots.txt` defines crawler access and advertises the sitemap.
-- `.github/` contains repository automation and collaboration configuration.
-- `ROADMAP.md` governs project priorities and sequencing.
+- Repository: `site-solutions-pro/wellmax`.
+- Production base: `https://site-solutions-pro.github.io/wellmax/`.
+- Hosting: GitHub Pages.
+- Stack: static HTML5, shared CSS, and progressive ES6 JavaScript.
+- Locales: English (`en`), Brazilian Portuguese (`pt-BR`), and Spanish (`es`).
+- English content is at the repository root; localized content is under `pt/` and `es/`.
+- Active production source must never reference `/pepeducation/` or `site-solutions-pro.github.io/pepeducation/`.
+- `sitemap.xml` and the public HTML filesystem must remain in exact parity.
+- `robots.txt` must advertise the WellMax sitemap.
 
-Preserve this stack unless maintainers explicitly approve a migration.
-Do not invent directories, frameworks, build systems, or architectural layers that do not exist.
-Any approved migration must preserve:
+Do not introduce a framework, build system, directory layer, database, or URL migration without explicit maintainer approval.
 
-- Public URLs.
-- SEO metadata.
-- Canonical URLs.
-- Structured data.
-- Published content.
-- Required redirects.
-- Sitemap coverage.
-## 3. Decision Priority
-When requirements conflict, apply this order:
+## 3. Mission and safety boundary
 
-1. Safety.
-2. Scientific accuracy.
-3. Regulatory accuracy.
-4. Accessibility.
-5. Backward compatibility.
-6. SEO and discoverability.
-7. Performance.
-8. Visual consistency.
-9. Delivery speed.
+WellMax is an evidence-based scientific education platform covering peptides, metabolism, longevity, neuroscience, performance, health, supplements, biomarkers, and evidence-based biohacking.
 
-Document any unresolved conflict and request maintainer direction before taking an irreversible action.
-## 4. Repository Rules
-Always:
+WellMax provides education, not diagnosis, prescribing, treatment, or a substitute for qualified medical care.
 
-- Inspect the repository, applicable instructions, and working tree before editing.
-- Make the smallest valid change that satisfies the task.
-- Preserve working pages and existing behavior outside the requested scope.
-- Preserve public and canonical URLs unless a change is explicitly approved.
-- Preserve valid metadata and structured data.
-- Update affected internal links when pages move or change.
-- Update `sitemap.xml` whenever public URL coverage changes.
-- Update homepage or category discovery when a public page should be discoverable there.
-- Validate every modified file with applicable checks.
-- Inspect the complete diff before committing.
-- Report incomplete validation and environmental limitations honestly.
+Never create or normalize into actionable guidance:
 
-Never:
-
-- Delete valid content without explicit, documented justification.
-- Rename, move, or remove a public URL casually.
-- Remove metadata, schema, or canonical tags without a valid replacement.
-- Weaken educational, safety, or regulatory language.
-- Invent references or unsupported facts.
-- Claim a check ran or passed when it did not.
-- Modify unrelated files or perform opportunistic refactors.
-- Push directly to `main`.
-- Disable or bypass quality rules to conceal failures.
-## 5. Scientific Standards
-Scientific content must use:
-
-- Original writing rather than copied or lightly paraphrased source text.
-- Verifiable primary scientific references for scientific claims.
-- Official sources for regulatory claims.
-- A visible date for regulatory verification and scientific review.
-- Explicit separation of human, animal, in vitro, mechanistic, and theoretical evidence.
-- Clear separation between observed outcomes and proposed mechanisms.
-- Explicit limitations, uncertainty, population boundaries, and study-design constraints.
-- Careful language for investigational, experimental, or unapproved compounds.
-
-Prefer, in descending relevance:
-
-- Peer-reviewed primary studies.
-- PubMed-indexed literature.
-- ClinicalTrials.gov and other official trial registries.
-- FDA, EMA, WHO, and corresponding official national regulators.
-- Official product labels for approved medicines.
-
-Do not treat retailer, clinic, reseller, influencer, forum, testimonial, or promotional content as scientific evidence.
-Secondary reviews may orient research but must not replace verification of pivotal primary claims.
-
-Never fabricate or guess:
-
-- Citations, DOI values, or PMID values.
-- Trial identifiers or phases.
-- Regulatory status or approved indications.
-- Statistics, denominators, endpoints, or effect sizes.
-- Adverse-event rates.
-- Approval, completion, or publication timelines.
-
-Verify time-sensitive scientific and regulatory statements against current sources on the review date.
-## 6. Safety Rules
-Never provide:
-
-- Dosing or dose-escalation instructions.
+- Dosing or dose escalation.
 - Reconstitution, preparation, storage, or injection instructions.
-- Treatment cycles or stacks.
-- Individualized treatment protocols.
+- Treatment cycles, stacks, or individualized protocols.
 - Product sourcing or purchasing instructions.
 - Self-medication or self-administration guidance.
-- Claims that investigational compounds are proven safe or effective.
+- Claims that investigational products are proven safe or effective.
 
-Every molecule page must state its educational purpose and current regulatory status clearly.
-Discuss risks in proportion to the evidence and distinguish absent data from evidence of no risk.
-Direct readers to qualified professionals and official labels where medical decisions are implicated.
-## 7. Evidence Classification
-Classify and visibly separate:
+Do not silently change existing safety policy or content already queued for human review. Use `docs/SAFETY_CONTENT_REVIEW.md` for the current review queue.
 
-- Human clinical evidence.
-- Preclinical animal evidence.
+## 4. Autonomy model
+
+Agents may autonomously, within an approved task scope:
+
+- Inspect the repository and relevant implementation context.
+- Research technical context and verifiable scientific or regulatory sources.
+- Create task-specific branches.
+- Edit files and add proportionate tests.
+- Execute tests and fix failures caused by the feature branch.
+- Create focused commits.
+- Push feature branches.
+- Open and update pull requests.
+- Analyze CI failures and fix them on the feature branch.
+- Prepare release and production-smoke-test reports.
+
+Agents must not autonomously:
+
+- Merge into `main`.
+- Push or force-push `main`.
+- Rewrite shared history.
+- Delete or rename published URLs.
+- Change public URL structure or redirect strategy.
+- Alter medical or safety policy.
+- Materially change regulatory claims.
+- Publish new clinical recommendations.
+- Approve their own scientific review.
+- Bypass, suppress, or reclassify failed CI to obtain a merge.
+
+The forbidden actions above require explicit human approval. A human approval applies only to the stated action and scope.
+
+## 5. Logical agent roles
+
+Use the smallest role set needed for a task. Role definitions and handoff contracts live in `docs/AGENT_ARCHITECTURE.md`.
+
+1. WellMax Supervisor: scope, sequencing, conflict resolution, and final readiness synthesis.
+2. Architecture Agent: static architecture, shared implementation, performance, and maintainability.
+3. Scientific Content Agent: evidence classification, references, safety, and regulatory accuracy.
+4. SEO & i18n Agent: metadata, URLs, sitemap, hreflang, locale identity, and discoverability.
+5. QA Agent: independent validation and defect reporting.
+6. UX Agent: accessibility, responsive behavior, information architecture, and interaction quality.
+7. Release Agent: branch, commit, PR, CI, deployment, and smoke-test orchestration.
+
+Conceptual independence is mandatory: the builder cannot declare its own work production-ready. The standard handoff is:
+
+`BUILD -> QA -> SEO/I18N -> SUPERVISOR -> HUMAN MERGE`
+
+The Scientific Content Agent and UX Agent join the review path whenever their domains are affected.
+
+## 6. Required workflow
+
+1. Read applicable instructions and `docs/ROADMAP.md`.
+2. Inspect branch, working tree, relevant files, and current tests.
+3. Create or use one task-specific feature/fix branch; never develop on `main`.
+4. Define scope, affected public identities, risks, and required reviewers.
+5. Implement the smallest coherent change.
+6. Run applicable validation and fix branch-caused failures.
+7. Inspect the complete diff and changed-file list.
+8. Commit with a focused Conventional Commit message.
+9. Push the feature branch and create or update exactly one task PR.
+10. Observe CI and fix feature-branch failures.
+11. Complete independent QA and SEO/i18n review when applicable.
+12. Obtain explicit human approval before merge.
+13. After an approved merge, observe Pages deployment and run production smoke tests.
+
+Never claim a test passed unless its result was observed. Report environmental limitations and skipped validation.
+
+## 7. Publication and page contracts
+
+Every publication-ready public page must have:
+
+- Exactly one descriptive `<title>`.
+- Exactly one `<h1>`.
+- One self-referencing canonical under the WellMax production base.
+- Correct HTML locale.
+- Reciprocal hreflang for translations that exist.
+- A unique meta description.
+- Valid internal links, fragments, and local assets.
+- A matching sitemap entry.
+- A declared page category.
+- Evidence and review status where scientific content is involved.
+- Appropriate structured data that matches visible content.
+
+Use `docs/CONTENT_PAGE_CONTRACT.md` for molecule, supplement, and biomarker checklists. Unsupported fields must be marked `N/A` or `EVIDENCE_UNAVAILABLE`; never invent content to satisfy a template.
+
+New pages, substantially modified pages, and pages explicitly marked publication-ready receive strict validation. Legacy `SHELL` pages must not fail solely because modernization is incomplete, but changes must not make them worse.
+
+## 8. Scientific and regulatory rules
+
+Follow `docs/SCIENTIFIC_STANDARD.md` and `docs/EDITORIAL_STYLE.md`.
+
+Keep these evidence classes separate:
+
+- Human randomized evidence.
+- Human observational evidence.
+- Preclinical evidence.
 - In vitro evidence.
 - Mechanistic evidence.
-- Theoretical or speculative interpretation.
+- Theoretical interpretation.
 
-Name the population, model, intervention, comparator, endpoint, and duration when material.
-Do not generalize animal or in vitro findings into human outcomes.
-Do not describe association as causation or a surrogate endpoint as clinical benefit.
-Label sponsor announcements and conference abstracts as non-peer-reviewed when applicable.
-## 8. Molecule Page Contract
-Every molecule page must contain the following when reliable evidence exists:
+Prefer primary studies and official regulatory sources. Date regulatory verification and scientific review. Never fabricate citations, identifiers, study details, effect sizes, adverse-event rates, or approval status. Approval applies to a specific product, indication, population, route, and jurisdiction; do not generalize it.
 
-- Breadcrumb and consistent navigation.
-- Hero and educational overview.
-- Compound class.
-- Mechanism of action, receptors, and pathways.
-- Pharmacology, pharmacokinetics, and pharmacodynamics.
-- Research status and evidence level.
-- Separate human and preclinical evidence.
-- Clinical development status and timeline.
-- Principal studies and observed outcomes.
-- Safety findings and reported adverse events.
-- Evidence limitations.
-- Dated regulatory status.
-- Evidence-based comparisons.
-- FAQ.
-- Verifiable references.
-- Related molecules and contextual internal links.
-- Last scientific review date.
-- Educational disclaimer.
-- Complete SEO metadata.
-- Appropriate, valid JSON-LD.
+Material scientific or regulatory changes require independent qualified human review before publication.
 
-Do not invent content to fill unavailable sections.
-State clearly when reliable evidence, human data, pharmacology, or regulatory information is unavailable.
-Do not imply completeness when a page is a preliminary profile.
-## 9. Internal Linking and Discovery
-For every new public page:
+## 9. Locale and linking rules
 
-- Add the canonical URL to `sitemap.xml`.
-- Add appropriate homepage or category discovery.
-- Add relevant related-molecule links.
-- Verify inbound and outbound internal links.
-- Verify fragment identifiers and their targets.
-- Verify every referenced local asset.
-- Preserve navigation labels, destinations, and visual consistency.
+Follow `docs/I18N_STANDARD.md` plus `pt/AGENTS.md` or `es/AGENTS.md` where applicable.
 
-Avoid orphan pages.
-Use relative links consistently with the existing GitHub Pages subpath deployment.
-When removing a page is explicitly approved, update links, sitemap coverage, and redirects together.
-## 10. SEO Requirements
-Every indexable public page must include:
+For every content identity, track expected `EN`, `PT-BR`, and `ES` variants using one status:
 
-- A unique, descriptive `<title>`.
-- A unique meta description.
-- One correct canonical URL.
-- Open Graph metadata.
-- Twitter Card metadata.
-- A semantic heading hierarchy with one clear primary heading.
-- A stable, descriptive URL.
-- A breadcrumb.
-- Contextual internal links.
-- Appropriate JSON-LD that matches visible content.
-- Sitemap inclusion.
-- Descriptive, accessible link labels.
+- `COMPLETE`
+- `PARTIAL`
+- `SHELL`
+- `MISSING`
+- `REVIEW_REQUIRED`
 
-Use Schema.org types only when all applicable requirements are met.
-Keep canonical hosts and paths consistent with the production GitHub Pages URL.
-Avoid duplicate metadata, keyword stuffing, unsupported medical claims, misleading schema, and duplicate canonical URLs.
-Do not add structured data solely to pursue rich results when the visible page does not support it.
-## 11. Accessibility and UX
-Require:
+A localized page must link to the same locale whenever an equivalent localized destination exists. Language switchers may cross locales and should preserve content identity when the translation exists.
 
-- Mobile-first, responsive design.
-- Semantic HTML before ARIA.
-- Full keyboard accessibility.
-- Visible focus states.
-- Descriptive form, control, and navigation labels.
-- Correct button types and native control semantics.
-- Logical heading order.
-- Useful alt text for informative images and empty alt text for decorative images.
-- No information conveyed by color alone.
-- Reduced-motion support for nonessential animation.
-- Readable typography, spacing, contrast, and touch targets.
-- Progressive enhancement when JavaScript is unavailable.
-- WCAG 2.2 AA conformance where practical.
+## 10. SEO, UX, QA, and release standards
 
-Do not add fake forms, inert controls, keyboard traps, or decorative ARIA.
-Test changed interactions at narrow and wide viewport sizes.
-## 12. Performance
-Prefer:
+- SEO: `docs/SEO_STANDARD.md`.
+- Internationalization: `docs/I18N_STANDARD.md`.
+- UX and accessibility: `docs/UX_STANDARD.md`, `docs/DESIGN_SYSTEM.md`, and `docs/UX_GUIDELINES.md`.
+- QA and validation: `docs/QA_STANDARD.md`.
+- Release and deployment: `docs/RELEASE_STANDARD.md`.
+- Roadmap and sequencing: `docs/ROADMAP.md`.
 
-- Minimal, deferred JavaScript.
-- Reusable CSS and existing design tokens.
-- Appropriately sized and compressed assets.
-- Native lazy loading for below-the-fold media where appropriate.
-- Efficient, semantic DOM structure.
-- Progressive enhancement and native browser capabilities.
+Preserve WCAG 2.2 AA behavior where practical, semantic HTML, keyboard access, visible focus, responsive layouts, reduced motion, progressive enhancement, and static deployability.
 
-Avoid unnecessary dependencies, duplicate CSS, oversized images, and unjustified render-blocking assets.
-Do not use JavaScript where native HTML or CSS provides equivalent accessible behavior.
-Preserve static deployability unless a migration is explicitly approved.
-## 13. Git Workflow
-For every task:
+## 11. Minimum quality gates
 
-1. Inspect the repository, instructions, branch, and status.
-2. Create or use one task-specific branch; never work on `main`.
-3. Implement the smallest coherent change.
-4. Run applicable validation.
-5. Inspect the full diff and changed-file list.
-6. Commit with a focused Conventional Commit message.
-7. Update the existing task PR or create exactly one dedicated PR.
-8. Never push directly to `main`.
-
-Allowed commit prefixes include `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, and `ci:`.
-Keep commits small, reviewable, and limited to one concern.
-Do not rewrite shared history unless maintainers explicitly request it.
-## 14. Pull Request Standard
-Every pull request must describe:
-
-- Objective and scope.
-- Files changed and implementation approach.
-- Scientific considerations.
-- Safety and regulatory considerations.
-- SEO and discoverability impact.
-- Accessibility and responsive-design impact.
-- Exact tests and checks run.
-- Known limitations and unperformed validation.
-- Screenshots for perceptible UI changes.
-- Sitemap and internal-link status.
-- Rollback considerations.
-
-Keep the PR limited to its stated objective.
-Never merge with failing required checks.
-## 15. Quality Gates
-Before completing a task:
+Before handoff, as applicable:
 
 - Run `git diff --check`.
-- Validate modified HTML.
-- Validate YAML when YAML changes.
-- Validate sitemap XML when `sitemap.xml` changes.
-- Parse every modified JSON-LD block.
-- Check affected internal links, fragments, and local assets.
-- Run existing automated tests and relevant repository checks.
+- Validate modified HTML and YAML.
+- Check JavaScript syntax.
+- Parse modified JSON-LD.
+- Validate changed links, fragments, and assets.
+- Validate canonical and production-base correctness.
+- Validate sitemap/file parity and the robots sitemap.
+- Validate localized routing and hreflang when affected.
+- Run existing Quality checks and new regression tests.
 - Inspect the complete diff and changed-file list.
-- Confirm no unrelated changes are present.
-- Confirm the working tree is clean after commit.
+- Confirm no unrelated files changed.
 
-Use the strongest available validation appropriate to the change.
-If browser tooling is unavailable, state explicitly that visual validation was not performed.
-Never convert a failed agent check into a warning unless an external environment limitation caused it.
-## 16. GitHub Actions
-Treat CI failures as product defects unless evidence demonstrates an infrastructure failure.
-Do not suppress a failing rule merely to obtain a green build.
+Do not weaken a check to hide a product defect. If a new rule would break untouched legacy or `SHELL` pages, scope the rule to new, substantially modified, or explicitly publication-ready pages and document the debt.
 
-When workflows change:
+## 12. Pull request and completion reporting
 
-- Preserve least-privilege permissions.
-- Pin stable major action versions or immutable revisions as repository policy requires.
-- Avoid insecure compatibility flags and untrusted script interpolation.
-- Document new checks and their expected output.
-- Match the workflow to the current static GitHub Pages architecture.
-- Validate workflow syntax and event behavior.
-## 17. Roadmap
-`ROADMAP.md` is the single source of truth for prioritization and sequencing.
-Do not duplicate the full roadmap in this manual, issues, or implementation notes.
-If `ROADMAP.md` is unavailable or conflicts with an approved task, record the limitation and seek maintainer direction.
-## 18. Forbidden Changes
-The following are prohibited:
+Every PR must report:
 
-- Fabricated science, citations, or regulatory claims.
-- Medical-treatment, self-medication, or product-sourcing guidance.
-- Direct pushes to `main`.
-- Unrelated refactors or scope expansion.
-- Silent public URL or canonical URL changes.
-- Removal of required sitemap coverage.
-- Removal of canonical tags.
-- Removal of JSON-LD without a valid replacement or documented justification.
-- Disabling checks, rules, or tests to hide defects.
-- Claims of success without command output, review evidence, or disclosed limitations.
-## 19. Completion Checklist
-Every completed task must confirm:
+- Objective and scope.
+- Files and implementation approach.
+- Scientific, safety, regulatory, SEO, i18n, accessibility, and responsive impact.
+- Exact tests and results.
+- Sitemap, internal-link, and public-URL status.
+- Known limitations and unperformed validation.
+- Screenshots for visible UI changes.
+- Rollback considerations.
+- Required human approvals.
 
-- [ ] Scope matches the request and no unrelated files changed.
-- [ ] Safety rules were followed.
-- [ ] Scientific claims are supported and evidence classes are distinct.
-- [ ] Public and canonical URLs were preserved or explicitly approved.
-- [ ] Metadata is complete for affected public pages.
-- [ ] Structured data is appropriate and valid.
-- [ ] Sitemap coverage is correct.
-- [ ] Internal links, fragments, and local assets are correct.
-- [ ] Accessibility and keyboard behavior were considered.
-- [ ] Responsive behavior was considered.
-- [ ] Applicable tests and quality gates were run.
-- [ ] Failures, omissions, and limitations were reported honestly.
-- [ ] The commit is focused and the PR is ready for review.
+Completion requires a focused diff, green required checks, independent review evidence, and a clear statement that merge remains a human decision.
