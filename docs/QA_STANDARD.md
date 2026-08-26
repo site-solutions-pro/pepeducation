@@ -93,7 +93,7 @@ Strict publication checks apply to:
 
 Untouched legacy, `SHELL`, or explicitly incomplete pages do not fail solely because a future field is missing. Regression checks should target changed behavior. A change to a legacy page must not remove existing metadata, worsen links, or misrepresent its state.
 
-Until a machine-readable page manifest is approved, treat a page as substantially modified when the task changes its scientific meaning, user journey, page identity, core structure, metadata strategy, or publication state. Cosmetic or isolated-link changes receive targeted checks plus preservation assertions.
+Use `data/content-manifest.json` to identify a page's declared locale status and review requirements. Treat a page as substantially modified when the task changes its scientific meaning, user journey, page identity, core structure, metadata strategy, or publication state. Cosmetic or isolated-link changes receive targeted checks plus preservation assertions.
 
 ## Required CI coverage
 
@@ -109,6 +109,7 @@ Quality CI must cover:
 - JSON-LD parsing.
 - Title, H1, canonical, locale, and metadata for strict pages.
 - Hreflang reciprocity where applicable.
+- Content-manifest JSON, enum, identity, route, filesystem, sitemap, and human-readable report consistency.
 - Targeted regressions added by feature work.
 
 Do not create broad allowlists that hide new defects. Historical/migration documentation may contain retired URLs only when clearly non-production and explicitly excluded.

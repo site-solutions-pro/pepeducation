@@ -1,0 +1,1749 @@
+{
+  "version": 1,
+  "generated_on": "2026-08-26",
+  "repository": "site-solutions-pro/wellmax",
+  "production_base": "https://site-solutions-pro.github.io/wellmax/",
+  "locales": {
+    "en": "English",
+    "pt": "Portuguese (Brazil)",
+    "es": "Spanish"
+  },
+  "content_families": [
+    {
+      "id": "biomarkers",
+      "type": "hub",
+      "slug": "biomarkers",
+      "title": "Biomarkers",
+      "routes": {
+        "en": "/wellmax/biomarkers.html",
+        "pt": "/wellmax/pt/biomarkers.html",
+        "es": "/wellmax/es/biomarkers.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "apob",
+      "type": "biomarker",
+      "slug": "apob",
+      "title": "ApoB",
+      "routes": {
+        "en": "/wellmax/biomarkers/apob.html",
+        "pt": "/wellmax/pt/biomarkers/apob.html",
+        "es": "/wellmax/es/biomarkers/apob.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "fasting-insulin",
+      "type": "biomarker",
+      "slug": "fasting-insulin",
+      "title": "Fasting Insulin",
+      "routes": {
+        "en": "/wellmax/biomarkers/fasting-insulin.html",
+        "pt": "/wellmax/pt/biomarkers/fasting-insulin.html",
+        "es": "/wellmax/es/biomarkers/fasting-insulin.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "ferritin",
+      "type": "biomarker",
+      "slug": "ferritin",
+      "title": "Ferritin",
+      "routes": {
+        "en": "/wellmax/biomarkers/ferritin.html",
+        "pt": "/wellmax/pt/biomarkers/ferritin.html",
+        "es": "/wellmax/es/biomarkers/ferritin.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "hba1c",
+      "type": "biomarker",
+      "slug": "hba1c",
+      "title": "HbA1c",
+      "routes": {
+        "en": "/wellmax/biomarkers/hba1c.html",
+        "pt": "/wellmax/pt/biomarkers/hba1c.html",
+        "es": "/wellmax/es/biomarkers/hba1c.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "hs-crp",
+      "type": "biomarker",
+      "slug": "hs-crp",
+      "title": "hs-CRP",
+      "routes": {
+        "en": "/wellmax/biomarkers/hs-crp.html",
+        "pt": "/wellmax/pt/biomarkers/hs-crp.html",
+        "es": "/wellmax/es/biomarkers/hs-crp.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "igf-1",
+      "type": "biomarker",
+      "slug": "igf-1",
+      "title": "IGF-1",
+      "routes": {
+        "en": "/wellmax/biomarkers/igf-1.html",
+        "pt": "/wellmax/pt/biomarkers/igf-1.html",
+        "es": "/wellmax/es/biomarkers/igf-1.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "lpa",
+      "type": "biomarker",
+      "slug": "lpa",
+      "title": "Lp(a)",
+      "routes": {
+        "en": "/wellmax/biomarkers/lpa.html",
+        "pt": "/wellmax/pt/biomarkers/lpa.html",
+        "es": "/wellmax/es/biomarkers/lpa.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "vitamin-d",
+      "type": "biomarker",
+      "slug": "vitamin-d",
+      "title": "Vitamin D",
+      "routes": {
+        "en": "/wellmax/biomarkers/vitamin-d.html",
+        "pt": "/wellmax/pt/biomarkers/vitamin-d.html",
+        "es": "/wellmax/es/biomarkers/vitamin-d.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "comparisons",
+      "type": "comparison",
+      "slug": "comparisons",
+      "title": "Comparisons",
+      "routes": {
+        "en": "/wellmax/comparisons.html",
+        "pt": "/wellmax/pt/comparisons.html",
+        "es": "/wellmax/es/comparisons.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "MEDIUM",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "evidence-guide",
+      "type": "research",
+      "slug": "evidence-guide",
+      "title": "Evidence Guide",
+      "routes": {
+        "en": "/wellmax/evidence-guide.html",
+        "pt": "/wellmax/pt/evidence-guide.html",
+        "es": "/wellmax/es/evidence-guide.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "MEDIUM",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: ES."
+    },
+    {
+      "id": "explore",
+      "type": "hub",
+      "slug": "explore",
+      "title": "Explore",
+      "routes": {
+        "en": "/wellmax/explore.html",
+        "pt": "/wellmax/pt/explore.html",
+        "es": "/wellmax/es/explore.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "health-hub",
+      "type": "hub",
+      "slug": "health-hub",
+      "title": "Health Hub",
+      "routes": {
+        "en": "/wellmax/health-hub.html",
+        "pt": "/wellmax/pt/health-hub.html",
+        "es": "/wellmax/es/health-hub.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "home",
+      "type": "home",
+      "slug": "home",
+      "title": "WellMax Education",
+      "routes": {
+        "en": "/wellmax/",
+        "pt": "/wellmax/pt/",
+        "es": "/wellmax/es/"
+      },
+      "status": {
+        "en": "COMPLETE",
+        "pt": "PARTIAL",
+        "es": "PARTIAL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "MEDIUM",
+      "notes": "One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. EN meets the v1 structural and metadata threshold; PT and ES remain partial pending metadata and human i18n review."
+    },
+    {
+      "id": "library",
+      "type": "hub",
+      "slug": "library",
+      "title": "Research Library",
+      "routes": {
+        "en": "/wellmax/library.html",
+        "pt": "/wellmax/pt/library.html",
+        "es": "/wellmax/es/library.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "longevity",
+      "type": "hub",
+      "slug": "longevity",
+      "title": "Longevity",
+      "routes": {
+        "en": "/wellmax/longevity.html",
+        "pt": "/wellmax/pt/longevity.html",
+        "es": "/wellmax/es/longevity.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "membership",
+      "type": "membership",
+      "slug": "membership",
+      "title": "Membership",
+      "routes": {
+        "en": "/wellmax/membership.html",
+        "pt": "/wellmax/pt/membership.html",
+        "es": "/wellmax/es/membership.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "MEDIUM",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "metabolism",
+      "type": "hub",
+      "slug": "metabolism",
+      "title": "Metabolism",
+      "routes": {
+        "en": "/wellmax/metabolism.html",
+        "pt": "/wellmax/pt/metabolism.html",
+        "es": "/wellmax/es/metabolism.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "neuroscience",
+      "type": "hub",
+      "slug": "neuroscience",
+      "title": "Neuroscience",
+      "routes": {
+        "en": "/wellmax/neuroscience.html",
+        "pt": "/wellmax/pt/neuroscience.html",
+        "es": "/wellmax/es/neuroscience.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "peptides",
+      "type": "hub",
+      "slug": "peptides",
+      "title": "Peptides",
+      "routes": {
+        "en": "/wellmax/peptides.html",
+        "pt": "/wellmax/pt/peptides.html",
+        "es": "/wellmax/es/peptides.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "ahk-cu",
+      "type": "peptide",
+      "slug": "ahk-cu",
+      "title": "AHK-Cu",
+      "routes": {
+        "en": "/wellmax/peptides/ahk-cu.html",
+        "pt": "/wellmax/pt/peptides/ahk-cu.html",
+        "es": "/wellmax/es/peptides/ahk-cu.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "aod-9604",
+      "type": "peptide",
+      "slug": "aod-9604",
+      "title": "AOD-9604",
+      "routes": {
+        "en": "/wellmax/peptides/aod-9604.html",
+        "pt": "/wellmax/pt/peptides/aod-9604.html",
+        "es": "/wellmax/es/peptides/aod-9604.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "REVIEW_REQUIRED",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. The PT variant is listed in docs/SAFETY_CONTENT_REVIEW.md and requires qualified human review. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "ara-290",
+      "type": "peptide",
+      "slug": "ara-290",
+      "title": "ARA-290",
+      "routes": {
+        "en": "/wellmax/peptides/ara-290.html",
+        "pt": "/wellmax/pt/peptides/ara-290.html",
+        "es": "/wellmax/es/peptides/ara-290.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "bpc-157",
+      "type": "peptide",
+      "slug": "bpc-157",
+      "title": "BPC-157",
+      "routes": {
+        "en": "/wellmax/peptides/bpc-157.html",
+        "pt": "/wellmax/pt/peptides/bpc-157.html",
+        "es": "/wellmax/es/peptides/bpc-157.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "cjc-1295",
+      "type": "peptide",
+      "slug": "cjc-1295",
+      "title": "CJC-1295",
+      "routes": {
+        "en": "/wellmax/peptides/cjc-1295.html",
+        "pt": "/wellmax/pt/peptides/cjc-1295.html",
+        "es": "/wellmax/es/peptides/cjc-1295.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "epitalon",
+      "type": "peptide",
+      "slug": "epitalon",
+      "title": "Epitalon",
+      "routes": {
+        "en": "/wellmax/peptides/epitalon.html",
+        "pt": "/wellmax/pt/peptides/epitalon.html",
+        "es": "/wellmax/es/peptides/epitalon.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "REVIEW_REQUIRED",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. The PT variant is listed in docs/SAFETY_CONTENT_REVIEW.md and requires qualified human review. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "ghk-cu",
+      "type": "peptide",
+      "slug": "ghk-cu",
+      "title": "GHK-Cu",
+      "routes": {
+        "en": "/wellmax/peptides/ghk-cu.html",
+        "pt": "/wellmax/pt/peptides/ghk-cu.html",
+        "es": "/wellmax/es/peptides/ghk-cu.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "gloe-70mg",
+      "type": "peptide",
+      "slug": "gloe-70mg",
+      "title": "GLOE 70 mg",
+      "routes": {
+        "en": "/wellmax/peptides/gloe-70mg.html",
+        "pt": "/wellmax/pt/peptides/gloe-70mg.html",
+        "es": "/wellmax/es/peptides/gloe-70mg.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "REVIEW_REQUIRED",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. The PT variant is listed in docs/SAFETY_CONTENT_REVIEW.md and requires qualified human review. The GLOE/gloe-70mg identity is retained; the GLOE to GLOW URL migration remains deferred pending an approved redirect and SEO plan. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "ipamorelin",
+      "type": "peptide",
+      "slug": "ipamorelin",
+      "title": "Ipamorelin",
+      "routes": {
+        "en": "/wellmax/peptides/ipamorelin.html",
+        "pt": "/wellmax/pt/peptides/ipamorelin.html",
+        "es": "/wellmax/es/peptides/ipamorelin.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "klow-80mg",
+      "type": "peptide",
+      "slug": "klow-80mg",
+      "title": "KLOW 80 mg",
+      "routes": {
+        "en": "/wellmax/peptides/klow-80mg.html",
+        "pt": "/wellmax/pt/peptides/klow-80mg.html",
+        "es": "/wellmax/es/peptides/klow-80mg.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "REVIEW_REQUIRED",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. The PT variant is listed in docs/SAFETY_CONTENT_REVIEW.md and requires qualified human review. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "kpv",
+      "type": "peptide",
+      "slug": "kpv",
+      "title": "KPV",
+      "routes": {
+        "en": "/wellmax/peptides/kpv.html",
+        "pt": "/wellmax/pt/peptides/kpv.html",
+        "es": "/wellmax/es/peptides/kpv.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "mots-c",
+      "type": "peptide",
+      "slug": "mots-c",
+      "title": "MOTS-c",
+      "routes": {
+        "en": "/wellmax/peptides/mots-c.html",
+        "pt": "/wellmax/pt/peptides/mots-c.html",
+        "es": "/wellmax/es/peptides/mots-c.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "REVIEW_REQUIRED",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. The PT variant is listed in docs/SAFETY_CONTENT_REVIEW.md and requires qualified human review. No non-language inbound discovery link was detected for: ES."
+    },
+    {
+      "id": "retatrutide",
+      "type": "peptide",
+      "slug": "retatrutide",
+      "title": "Retatrutide",
+      "routes": {
+        "en": "/wellmax/peptides/retatrutide.html",
+        "pt": "/wellmax/pt/peptides/retatrutide.html",
+        "es": "/wellmax/es/peptides/retatrutide.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "REVIEW_REQUIRED",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. The PT variant is listed in docs/SAFETY_CONTENT_REVIEW.md and requires qualified human review. No non-language inbound discovery link was detected for: ES."
+    },
+    {
+      "id": "semaglutide",
+      "type": "peptide",
+      "slug": "semaglutide",
+      "title": "Semaglutide",
+      "routes": {
+        "en": "/wellmax/peptides/semaglutide.html",
+        "pt": "/wellmax/pt/peptides/semaglutide.html",
+        "es": "/wellmax/es/peptides/semaglutide.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "ss-31",
+      "type": "peptide",
+      "slug": "ss-31",
+      "title": "SS-31",
+      "routes": {
+        "en": "/wellmax/peptides/ss-31.html",
+        "pt": "/wellmax/pt/peptides/ss-31.html",
+        "es": "/wellmax/es/peptides/ss-31.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "survodutide",
+      "type": "peptide",
+      "slug": "survodutide",
+      "title": "Survodutide",
+      "routes": {
+        "en": "/wellmax/peptides/survodutide.html",
+        "pt": "/wellmax/pt/peptides/survodutide.html",
+        "es": "/wellmax/es/peptides/survodutide.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "tb-500",
+      "type": "peptide",
+      "slug": "tb-500",
+      "title": "TB-500",
+      "routes": {
+        "en": "/wellmax/peptides/tb-500.html",
+        "pt": "/wellmax/pt/peptides/tb-500.html",
+        "es": "/wellmax/es/peptides/tb-500.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "tesamorelin",
+      "type": "peptide",
+      "slug": "tesamorelin",
+      "title": "Tesamorelin",
+      "routes": {
+        "en": "/wellmax/peptides/tesamorelin.html",
+        "pt": "/wellmax/pt/peptides/tesamorelin.html",
+        "es": "/wellmax/es/peptides/tesamorelin.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "tirzepatide",
+      "type": "peptide",
+      "slug": "tirzepatide",
+      "title": "Tirzepatide",
+      "routes": {
+        "en": "/wellmax/peptides/tirzepatide.html",
+        "pt": "/wellmax/pt/peptides/tirzepatide.html",
+        "es": "/wellmax/es/peptides/tirzepatide.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "SHELL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": false,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): PT, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: PT, ES."
+    },
+    {
+      "id": "performance",
+      "type": "hub",
+      "slug": "performance",
+      "title": "Performance",
+      "routes": {
+        "en": "/wellmax/performance.html",
+        "pt": "/wellmax/pt/performance.html",
+        "es": "/wellmax/es/performance.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements."
+    },
+    {
+      "id": "research-tracker",
+      "type": "research",
+      "slug": "research-tracker",
+      "title": "Research Tracker",
+      "routes": {
+        "en": "/wellmax/research-tracker.html",
+        "pt": "/wellmax/pt/research-tracker.html",
+        "es": "/wellmax/es/research-tracker.html"
+      },
+      "status": {
+        "en": "PARTIAL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": true,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "MEDIUM",
+      "notes": "Generated shell locale(s): ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: ES."
+    },
+    {
+      "id": "supplements",
+      "type": "hub",
+      "slug": "supplements",
+      "title": "Supplements",
+      "routes": {
+        "en": "/wellmax/supplements.html",
+        "pt": "/wellmax/pt/supplements.html",
+        "es": "/wellmax/es/supplements.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "N/A",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "b-complex",
+      "type": "supplement",
+      "slug": "b-complex",
+      "title": "B-Complex",
+      "routes": {
+        "en": "/wellmax/supplements/b-complex.html",
+        "pt": "/wellmax/pt/supplements/b-complex.html",
+        "es": "/wellmax/es/supplements/b-complex.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "biotin-b7",
+      "type": "supplement",
+      "slug": "biotin-b7",
+      "title": "Biotin B7",
+      "routes": {
+        "en": "/wellmax/supplements/biotin-b7.html",
+        "pt": "/wellmax/pt/supplements/biotin-b7.html",
+        "es": "/wellmax/es/supplements/biotin-b7.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "folate-b9",
+      "type": "supplement",
+      "slug": "folate-b9",
+      "title": "Folate B9",
+      "routes": {
+        "en": "/wellmax/supplements/folate-b9.html",
+        "pt": "/wellmax/pt/supplements/folate-b9.html",
+        "es": "/wellmax/es/supplements/folate-b9.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "magnesium",
+      "type": "supplement",
+      "slug": "magnesium",
+      "title": "Magnesium",
+      "routes": {
+        "en": "/wellmax/supplements/magnesium.html",
+        "pt": "/wellmax/pt/supplements/magnesium.html",
+        "es": "/wellmax/es/supplements/magnesium.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "niacin-b3",
+      "type": "supplement",
+      "slug": "niacin-b3",
+      "title": "Niacin B3",
+      "routes": {
+        "en": "/wellmax/supplements/niacin-b3.html",
+        "pt": "/wellmax/pt/supplements/niacin-b3.html",
+        "es": "/wellmax/es/supplements/niacin-b3.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "omega-3",
+      "type": "supplement",
+      "slug": "omega-3",
+      "title": "Omega-3",
+      "routes": {
+        "en": "/wellmax/supplements/omega-3.html",
+        "pt": "/wellmax/pt/supplements/omega-3.html",
+        "es": "/wellmax/es/supplements/omega-3.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "pantothenic-b5",
+      "type": "supplement",
+      "slug": "pantothenic-b5",
+      "title": "Pantothenic B5",
+      "routes": {
+        "en": "/wellmax/supplements/pantothenic-b5.html",
+        "pt": "/wellmax/pt/supplements/pantothenic-b5.html",
+        "es": "/wellmax/es/supplements/pantothenic-b5.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "riboflavin-b2",
+      "type": "supplement",
+      "slug": "riboflavin-b2",
+      "title": "Riboflavin B2",
+      "routes": {
+        "en": "/wellmax/supplements/riboflavin-b2.html",
+        "pt": "/wellmax/pt/supplements/riboflavin-b2.html",
+        "es": "/wellmax/es/supplements/riboflavin-b2.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "thiamin-b1",
+      "type": "supplement",
+      "slug": "thiamin-b1",
+      "title": "Thiamin B1",
+      "routes": {
+        "en": "/wellmax/supplements/thiamin-b1.html",
+        "pt": "/wellmax/pt/supplements/thiamin-b1.html",
+        "es": "/wellmax/es/supplements/thiamin-b1.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "vitamin-b12",
+      "type": "supplement",
+      "slug": "vitamin-b12",
+      "title": "Vitamin B12",
+      "routes": {
+        "en": "/wellmax/supplements/vitamin-b12.html",
+        "pt": "/wellmax/pt/supplements/vitamin-b12.html",
+        "es": "/wellmax/es/supplements/vitamin-b12.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "vitamin-b6",
+      "type": "supplement",
+      "slug": "vitamin-b6",
+      "title": "Vitamin B6",
+      "routes": {
+        "en": "/wellmax/supplements/vitamin-b6.html",
+        "pt": "/wellmax/pt/supplements/vitamin-b6.html",
+        "es": "/wellmax/es/supplements/vitamin-b6.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "vitamin-c",
+      "type": "supplement",
+      "slug": "vitamin-c",
+      "title": "Vitamin C",
+      "routes": {
+        "en": "/wellmax/supplements/vitamin-c.html",
+        "pt": "/wellmax/pt/supplements/vitamin-c.html",
+        "es": "/wellmax/es/supplements/vitamin-c.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "vitamin-d3",
+      "type": "supplement",
+      "slug": "vitamin-d3",
+      "title": "Vitamin D3",
+      "routes": {
+        "en": "/wellmax/supplements/vitamin-d3.html",
+        "pt": "/wellmax/pt/supplements/vitamin-d3.html",
+        "es": "/wellmax/es/supplements/vitamin-d3.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    },
+    {
+      "id": "zinc",
+      "type": "supplement",
+      "slug": "zinc",
+      "title": "Zinc",
+      "routes": {
+        "en": "/wellmax/supplements/zinc.html",
+        "pt": "/wellmax/pt/supplements/zinc.html",
+        "es": "/wellmax/es/supplements/zinc.html"
+      },
+      "status": {
+        "en": "SHELL",
+        "pt": "PARTIAL",
+        "es": "SHELL"
+      },
+      "sitemap": {
+        "en": true,
+        "pt": true,
+        "es": true
+      },
+      "linked": {
+        "en": false,
+        "pt": true,
+        "es": false
+      },
+      "scientific_review": "REVIEW_REQUIRED",
+      "seo_review": "REVIEW_REQUIRED",
+      "i18n_review": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "notes": "Generated shell locale(s): EN, ES. One or more substantive variants remain incomplete against metadata, structure, translation, or content-contract requirements. No non-language inbound discovery link was detected for: EN, ES."
+    }
+  ]
+}

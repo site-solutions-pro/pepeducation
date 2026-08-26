@@ -38,6 +38,8 @@ jobs:
             'docs/QA_STANDARD.md',
             'docs/RELEASE_STANDARD.md',
             'docs/CONTENT_PAGE_CONTRACT.md',
+            'docs/CONTENT_MANIFEST_STANDARD.md',
+            'docs/CONTENT_STATUS_REPORT.md',
             'docs/ROADMAP.md'
           ];
 
@@ -91,6 +93,20 @@ jobs:
             }
           }
 
+          assert.ok(
+            root.includes('Every agent updates the manifest and status report'),
+            'universal manifest update duty missing from AGENTS.md'
+          );
+          for (const contract of [
+            ['Supervisor manifest input', 'Read `data/content-manifest.json` before large content missions'],
+            ['Scientific manifest input', '`scientific_review` value'],
+            ['Scientific approval boundary', '`HUMAN_APPROVED` for its own work'],
+            ['SEO/i18n manifest inputs', '`seo_review`, and `i18n_review` values'],
+            ['QA manifest gate', 'content-manifest JSON, enums, content identity, routes, filesystem/sitemap parity, and status-report consistency']
+          ]) {
+            assert.ok(architecture.includes(contract[1]), `${contract[0]} missing from agent architecture`);
+          }
+
           const scientific = fs.readFileSync('docs/SCIENTIFIC_STANDARD.md', 'utf8');
           for (const evidenceClass of [
             'Human randomized evidence',
@@ -123,6 +139,251 @@ jobs:
 
       - name: Check JavaScript syntax
         run: find assets -name '*.js' -print0 | xargs -0 -n1 node --check
+
+      - name: Validate content manifest integrity
+        run: |
+          node <<'JS'
+          const assert = require('node:assert/strict');
+          const fs = require('node:fs');
+          const path = require('node:path');
+
+          const root = process.cwd();
+          const manifest = JSON.parse(fs.readFileSync('data/content-manifest.json', 'utf8'));
+          const locales = ['en', 'pt', 'es'];
+          const allowedTypes = new Set([
+            'home', 'hub', 'peptide', 'supplement', 'biomarker',
+            'comparison', 'research', 'membership', 'other'
+          ]);
+          const allowedStatuses = new Set([
+            'COMPLETE', 'PARTIAL', 'SHELL', 'MISSING', 'REVIEW_REQUIRED'
+          ]);
+          const allowedReviews = new Set(['REVIEW_REQUIRED', 'HUMAN_APPROVED', 'N/A']);
+          const allowedPriorities = new Set(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']);
+          const productionBase = 'https://site-solutions-pro.github.io/wellmax/';
+          const routeBase = '/wellmax/';
+
+          assert.equal(manifest.version, 1, 'unsupported manifest version');
+          assert.equal(manifest.repository, 'site-solutions-pro/wellmax', 'wrong manifest repository');
+          assert.equal(manifest.production_base, productionBase, 'wrong manifest production base');
+          assert.ok(Array.isArray(manifest.content_families), 'content_families must be an array');
+
+          const visit = (directory) => fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+            if (entry.name === '.git') return [];
+            const target = path.join(directory, entry.name);
+            if (entry.isDirectory()) return visit(target);
+            return entry.isFile() && entry.name.endsWith('.html')
+              ? [path.relative(root, target).replaceAll('\\', '/')]
+              : [];
+          });
+          const htmlFiles = visit(root).sort();
+          const htmlSet = new Set(htmlFiles);
+
+          const routeToFile = (route) => {
+            assert.ok(route.startsWith(routeBase), `route escapes ${routeBase}: ${route}`);
+            let relative = route.slice(routeBase.length);
+            if (!relative || relative.endsWith('/')) relative += 'index.html';
+            return decodeURIComponent(relative);
+          };
+          const fileToRoute = (file) => {
+            if (file === 'index.html') return routeBase;
+            if (file === 'pt/index.html') return `${routeBase}pt/`;
+            if (file === 'es/index.html') return `${routeBase}es/`;
+            return `${routeBase}${file}`;
+          };
+          const localeFile = (locale, identity) => locale === 'en' ? identity : `${locale}/${identity}`;
+          const identityFromFile = (file) => file.startsWith('pt/') || file.startsWith('es/')
+            ? file.slice(3)
+            : file;
+
+          const sitemapXml = fs.readFileSync('sitemap.xml', 'utf8');
+          const sitemapRoutes = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => {
+            const url = match[1].trim();
+            assert.ok(url.startsWith(productionBase), `sitemap URL outside production base: ${url}`);
+            return `${routeBase}${url.slice(productionBase.length)}`;
+          });
+          assert.equal(new Set(sitemapRoutes).size, sitemapRoutes.length, 'duplicate sitemap routes');
+          const sitemapSet = new Set(sitemapRoutes);
+
+          const ids = new Set();
+          const routes = new Set();
+          const manifestFiles = new Set();
+          const manifestSitemapRoutes = new Set();
+          const familyByFile = new Map();
+
+          for (const family of manifest.content_families) {
+            for (const field of [
+              'id', 'type', 'slug', 'title', 'routes', 'status', 'sitemap', 'linked',
+              'scientific_review', 'seo_review', 'i18n_review', 'priority', 'notes'
+            ]) {
+              assert.ok(Object.hasOwn(family, field), `${family.id || '<unknown>'}: missing ${field}`);
+            }
+            assert.ok(typeof family.id === 'string' && family.id, 'family id must be non-empty');
+            assert.ok(!ids.has(family.id), `duplicate content id: ${family.id}`);
+            ids.add(family.id);
+            assert.ok(allowedTypes.has(family.type), `${family.id}: invalid type ${family.type}`);
+            assert.ok(typeof family.slug === 'string' && family.slug, `${family.id}: invalid slug`);
+            assert.ok(typeof family.title === 'string' && family.title, `${family.id}: invalid title`);
+            assert.ok(typeof family.notes === 'string', `${family.id}: notes must be a string`);
+            assert.ok(allowedPriorities.has(family.priority), `${family.id}: invalid priority`);
+            for (const field of ['scientific_review', 'seo_review', 'i18n_review']) {
+              assert.ok(allowedReviews.has(family[field]), `${family.id}: invalid ${field}`);
+            }
+
+            const identities = new Set();
+            for (const locale of locales) {
+              assert.ok(Object.hasOwn(family.routes, locale), `${family.id}: missing routes.${locale}`);
+              assert.ok(Object.hasOwn(family.status, locale), `${family.id}: missing status.${locale}`);
+              assert.ok(Object.hasOwn(family.sitemap, locale), `${family.id}: missing sitemap.${locale}`);
+              assert.ok(Object.hasOwn(family.linked, locale), `${family.id}: missing linked.${locale}`);
+              assert.ok(allowedStatuses.has(family.status[locale]), `${family.id}: invalid ${locale} status`);
+              assert.equal(typeof family.sitemap[locale], 'boolean', `${family.id}: sitemap.${locale} must be boolean`);
+              assert.equal(typeof family.linked[locale], 'boolean', `${family.id}: linked.${locale} must be boolean`);
+
+              const route = family.routes[locale];
+              if (family.status[locale] === 'MISSING') {
+                assert.equal(route, null, `${family.id}: MISSING ${locale} route must be null`);
+                assert.equal(family.sitemap[locale], false, `${family.id}: MISSING ${locale} cannot be in sitemap`);
+                assert.equal(family.linked[locale], false, `${family.id}: MISSING ${locale} cannot be linked`);
+                continue;
+              }
+              assert.ok(typeof route === 'string', `${family.id}: ${locale} route must be a string`);
+              assert.ok(!routes.has(route), `duplicate manifest route: ${route}`);
+              routes.add(route);
+              if (locale === 'en') {
+                assert.ok(!route.startsWith('/wellmax/pt/') && !route.startsWith('/wellmax/es/'), `${family.id}: EN route has locale prefix`);
+              } else {
+                assert.ok(route.startsWith(`/wellmax/${locale}/`), `${family.id}: ${locale} route has wrong prefix`);
+              }
+
+              const file = routeToFile(route);
+              assert.ok(htmlSet.has(file), `${family.id}: route target missing: ${route} -> ${file}`);
+              manifestFiles.add(file);
+              familyByFile.set(file, { family, locale });
+              identities.add(identityFromFile(file));
+
+              const inSitemap = sitemapSet.has(route);
+              assert.equal(family.sitemap[locale], inSitemap, `${family.id}: sitemap.${locale} is stale`);
+              if (inSitemap) manifestSitemapRoutes.add(route);
+
+              const html = fs.readFileSync(file, 'utf8');
+              const generatedShell = html.includes('assets/i18n-page.js');
+              assert.equal(family.status[locale] === 'SHELL', generatedShell, `${family.id}: ${locale} shell status disagrees with renderer`);
+            }
+            assert.ok(identities.size <= 1, `${family.id}: locale routes do not preserve content identity`);
+          }
+
+          assert.deepEqual([...manifestFiles].sort(), htmlFiles, 'manifest and public HTML filesystem are out of sync');
+          assert.deepEqual([...manifestSitemapRoutes].sort(), [...sitemapSet].sort(), 'manifest and sitemap are out of sync');
+          assert.deepEqual([...routes].sort(), htmlFiles.map(fileToRoute).sort(), 'manifest route and filesystem route sets differ');
+
+          const inbound = Object.fromEntries(htmlFiles.map((file) => [file, 0]));
+          for (const file of htmlFiles) {
+            const html = fs.readFileSync(file, 'utf8');
+            for (const match of html.matchAll(/<a\b([^>]*?)href=["']([^"']+)["']([^>]*)>/gi)) {
+              const attributes = `${match[1]}${match[3]}`;
+              const href = match[2];
+              if (/data-language=/i.test(attributes)) continue;
+              if (/^(?:https?:|mailto:|tel:|javascript:|data:|#)/i.test(href)) continue;
+              const clean = href.split(/[?#]/)[0];
+              if (!clean) continue;
+              let target;
+              if (clean.startsWith(routeBase)) target = path.join(root, clean.slice(routeBase.length));
+              else target = path.resolve(path.dirname(path.join(root, file)), clean);
+              if (clean.endsWith('/')) target = path.join(target, 'index.html');
+              const relative = path.relative(root, target).replaceAll('\\', '/');
+              if (Object.hasOwn(inbound, relative)) inbound[relative] += 1;
+            }
+          }
+
+          // assets/app.js supplies these non-language primary navigation links at runtime.
+          for (const locale of locales) {
+            for (const identity of ['index.html', 'explore.html', 'library.html', 'biomarkers.html', 'comparisons.html', 'membership.html']) {
+              const target = localeFile(locale, identity);
+              if (Object.hasOwn(inbound, target)) inbound[target] += 1;
+            }
+          }
+
+          for (const [file, { family, locale }] of familyByFile) {
+            assert.equal(family.linked[locale], inbound[file] > 0, `${family.id}: linked.${locale} is stale`);
+          }
+
+          const manifestStandard = fs.readFileSync('docs/CONTENT_MANIFEST_STANDARD.md', 'utf8');
+          assert.ok(
+            manifestStandard.includes('`docs/CONTENT_PAGE_CONTRACT.md` is the canonical publication and review contract'),
+            'manifest standard does not defer to the canonical content-page contract'
+          );
+
+          const report = fs.readFileSync('docs/CONTENT_STATUS_REPORT.md', 'utf8');
+          const pageCount = manifest.content_families.reduce(
+            (total, family) => total + locales.filter((locale) => family.routes[locale] !== null).length,
+            0
+          );
+          assert.ok(
+            report.includes(`Total content families: **${manifest.content_families.length}**`),
+            'status report family total is stale'
+          );
+          assert.ok(
+            report.includes(`Total public pages represented: **${pageCount}**`),
+            'status report page total is stale'
+          );
+
+          for (const status of allowedStatuses) {
+            const counts = locales.map(
+              (locale) => manifest.content_families.filter((family) => family.status[locale] === status).length
+            );
+            const total = counts.reduce((sum, count) => sum + count, 0);
+            assert.ok(
+              report.includes(`| ${status} | ${counts[0]} | ${counts[1]} | ${counts[2]} | ${total} |`),
+              `status report locale totals are stale for ${status}`
+            );
+          }
+
+          for (const type of allowedTypes) {
+            const families = manifest.content_families.filter((family) => family.type === type);
+            const pages = families.reduce(
+              (total, family) => total + locales.filter((locale) => family.routes[locale] !== null).length,
+              0
+            );
+            assert.ok(
+              report.includes(`| ${type} | ${families.length} | ${pages} |`),
+              `status report type totals are stale for ${type}`
+            );
+          }
+
+          for (const priority of allowedPriorities) {
+            const count = manifest.content_families.filter((family) => family.priority === priority).length;
+            assert.ok(
+              report.includes(`| ${priority} | ${count} |`),
+              `status report priority total is stale for ${priority}`
+            );
+          }
+
+          const reviewLabels = {
+            scientific_review: 'scientific',
+            seo_review: 'SEO',
+            i18n_review: 'i18n'
+          };
+          for (const [field, label] of Object.entries(reviewLabels)) {
+            const count = manifest.content_families.filter((family) => family[field] === 'REVIEW_REQUIRED').length;
+            assert.ok(
+              report.includes(`**${count}** families require ${label} review`),
+              `status report review total is stale for ${field}`
+            );
+          }
+
+          const actualBacklog = [...report.matchAll(/^\|\s*\d+\s*\|\s*`([^`]+)`\s*\|/gm)]
+            .map((match) => match[1]);
+          assert.equal(actualBacklog.length, 20, 'status report must contain exactly 20 HIGH backlog entries');
+          assert.equal(new Set(actualBacklog).size, 20, 'status report top-20 HIGH backlog contains duplicates');
+          const familiesById = new Map(manifest.content_families.map((family) => [family.id, family]));
+          for (const id of actualBacklog) {
+            assert.ok(familiesById.has(id), `status report backlog identity is absent from manifest: ${id}`);
+            assert.equal(familiesById.get(id).priority, 'HIGH', `status report backlog identity is not HIGH: ${id}`);
+          }
+
+          console.log(`Validated ${manifest.content_families.length} content families, ${manifestFiles.size} manifest routes, ${htmlFiles.length} public HTML files and ${sitemapSet.size} sitemap routes.`);
+          console.log('Validated status-report locale, type, review, priority and top-backlog consistency.');
+          JS
 
       - name: Validate generated navigation paths
         run: |

@@ -94,6 +94,8 @@ The platform should communicate scientific promise proportionally to evidence. I
 
 The current implementation remains static HTML, CSS, JavaScript, and GitHub Pages. Near-term work must improve reuse and consistency without introducing unnecessary framework migration. Any future migration must preserve content, URLs, canonicals, redirects, sitemap coverage, and structured data.
 
+`data/content-manifest.json` is the machine-readable public-content inventory for planning content scale, translation parity, review requirements, discovery, and backlog priority. Agents and maintainers must keep it synchronized with public HTML and `sitemap.xml` under `docs/CONTENT_MANIFEST_STANDARD.md`; manifest status records readiness but never grants scientific approval or merge authority.
+
 ## Commercial direction
 
 Initial access model:

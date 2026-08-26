@@ -105,6 +105,8 @@ Scientific pages should distinguish:
 
 Agents may prepare `DRAFT` and `REVIEW_REQUIRED` content. They may not assign `HUMAN_APPROVED` to their own material scientific work.
 
+Before changing a scientific page, the Scientific Content Agent must read the corresponding `scientific_review` value and locale status in `data/content-manifest.json`. Approved work that materially changes the page or its readiness must update the manifest, but an agent must never set a manifest review field to `HUMAN_APPROVED` for its own work.
+
 ## Translation rule
 
 Translations preserve claim meaning, evidence class, uncertainty, dates, citations, and jurisdiction. Translation does not substitute for scientific review when the localized text changes meaning or adds locally specific regulatory claims.

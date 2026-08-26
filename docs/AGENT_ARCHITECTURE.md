@@ -75,6 +75,7 @@ Convert a human request or roadmap item into a bounded, auditable workflow and d
 
 - Interpret scope and instruction hierarchy.
 - Identify affected roles, public identities, URLs, locales, and risk level.
+- Read `data/content-manifest.json` before large content missions and use its identities, locale status, priority, and review fields to bound the work.
 - Sequence work and resolve non-policy conflicts.
 - Prevent scope expansion and unrelated changes.
 - Synthesize builder, scientific, UX, SEO/i18n, QA, and release evidence.
@@ -100,6 +101,7 @@ Convert a human request or roadmap item into a bounded, auditable workflow and d
 - Human request or approved roadmap item.
 - Applicable `AGENTS.md` files and standards.
 - Repository state, base branch, current CI, and known audit findings.
+- Current content manifest and status report for large content missions.
 - Role handoff envelopes.
 
 ### Required outputs
@@ -207,6 +209,7 @@ Prepare accurate, original, evidence-classified scientific content and an audita
 - Date scientific review and regulatory verification.
 - Preserve uncertainty and distinguish approved from experimental use.
 - Flag actionable or unsafe content for human review.
+- Use the manifest `scientific_review` field and locale status to identify review boundaries, and update them when approved work materially changes a page.
 
 ### Permitted autonomous actions
 
@@ -221,6 +224,7 @@ Prepare accurate, original, evidence-classified scientific content and an audita
 - Publish dosing, reconstitution, injection, treatment, sourcing, or self-administration guidance.
 - Materially change regulatory or safety claims without human approval.
 - Approve its own scientific review.
+- Set `scientific_review` or another manifest review field to `HUMAN_APPROVED` for its own work.
 
 ### Required inputs
 
@@ -228,6 +232,7 @@ Prepare accurate, original, evidence-classified scientific content and an audita
 - Existing page and source list.
 - Current official regulatory sources and review date.
 - Applicable content-page contract.
+- Corresponding manifest family, locale status, and `scientific_review` value.
 
 ### Required outputs
 
@@ -291,6 +296,7 @@ Protect discoverability, production URL integrity, and equivalent content identi
 
 - Content identity and expected EN/PT-BR/ES paths.
 - Translation status and publication state.
+- Manifest routes, locale status, `seo_review`, and `i18n_review` values.
 - Affected metadata, internal links, and sitemap entries.
 - Scientific review outcome when content changed.
 
@@ -334,6 +340,7 @@ Independently determine whether the implementation satisfies its acceptance crit
 - Reproduce relevant tests and inspect failures.
 - Test negative cases and regression boundaries.
 - Verify scope, files, URLs, content integrity, and CI behavior.
+- Validate content-manifest JSON, enums, content identity, routes, filesystem/sitemap parity, and status-report consistency.
 - Classify defects and block handoff when required.
 
 ### Permitted autonomous actions
@@ -356,6 +363,7 @@ Independently determine whether the implementation satisfies its acceptance crit
 - Base/head diff and changed-file list.
 - Test plan, local results, and CI state.
 - Applicable content, SEO/i18n, and UX contracts.
+- Content manifest and generated status report when public inventory or readiness is affected.
 
 ### Required outputs
 
@@ -374,6 +382,7 @@ Independently determine whether the implementation satisfies its acceptance crit
 ### Tests before handoff
 
 - Existing Quality workflow equivalents.
+- Content-manifest/filesystem/sitemap/report integrity checks.
 - Feature regression tests.
 - `git diff --check`.
 - Links/assets/fragments and metadata checks.
