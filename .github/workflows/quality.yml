@@ -16,6 +16,111 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Validate WellMax agent governance contracts
+        run: |
+          node <<'JS'
+          const assert = require('node:assert/strict');
+          const fs = require('node:fs');
+
+          const requiredFiles = [
+            'AGENTS.md',
+            'pt/AGENTS.md',
+            'es/AGENTS.md',
+            'peptides/AGENTS.md',
+            'supplements/AGENTS.md',
+            'biomarkers/AGENTS.md',
+            'docs/WELLMAX_CONSTITUTION.md',
+            'docs/AGENT_ARCHITECTURE.md',
+            'docs/SCIENTIFIC_STANDARD.md',
+            'docs/SEO_STANDARD.md',
+            'docs/I18N_STANDARD.md',
+            'docs/UX_STANDARD.md',
+            'docs/QA_STANDARD.md',
+            'docs/RELEASE_STANDARD.md',
+            'docs/CONTENT_PAGE_CONTRACT.md',
+            'docs/ROADMAP.md'
+          ];
+
+          for (const file of requiredFiles) {
+            assert.ok(fs.existsSync(file), `missing governance contract: ${file}`);
+            assert.ok(fs.readFileSync(file, 'utf8').trim().length > 100, `empty governance contract: ${file}`);
+          }
+
+          const root = fs.readFileSync('AGENTS.md', 'utf8');
+          assert.ok(root.includes('site-solutions-pro/wellmax'), 'repository identity missing from AGENTS.md');
+          assert.ok(
+            root.includes('https://site-solutions-pro.github.io/wellmax/'),
+            'production base missing from AGENTS.md'
+          );
+          assert.ok(
+            root.includes('BUILD -> QA -> SEO/I18N -> SUPERVISOR -> HUMAN MERGE'),
+            'required agent handoff sequence missing'
+          );
+
+          const architecture = fs.readFileSync('docs/AGENT_ARCHITECTURE.md', 'utf8');
+          const roles = [
+            'WellMax Supervisor',
+            'Architecture Agent',
+            'Scientific Content Agent',
+            'SEO & i18n Agent',
+            'QA Agent',
+            'UX Agent',
+            'Release Agent'
+          ];
+          const requiredRoleFields = [
+            '### Mission',
+            '### Responsibilities',
+            '### Permitted autonomous actions',
+            '### Forbidden actions',
+            '### Required inputs',
+            '### Required outputs',
+            '### Handoff criteria',
+            '### Tests before handoff',
+            '### Human-approval gates'
+          ];
+
+          for (let index = 0; index < roles.length; index += 1) {
+            const start = architecture.indexOf(`## ${index + 1}. ${roles[index]}`);
+            const end = index + 1 < roles.length
+              ? architecture.indexOf(`## ${index + 2}. ${roles[index + 1]}`)
+              : architecture.indexOf('## Escalation rules');
+            assert.ok(start >= 0 && end > start, `missing role contract: ${roles[index]}`);
+            const section = architecture.slice(start, end);
+            for (const field of requiredRoleFields) {
+              assert.ok(section.includes(field), `${roles[index]} missing ${field}`);
+            }
+          }
+
+          const scientific = fs.readFileSync('docs/SCIENTIFIC_STANDARD.md', 'utf8');
+          for (const evidenceClass of [
+            'Human randomized evidence',
+            'Human observational evidence',
+            'Preclinical evidence',
+            'In vitro evidence',
+            'Mechanistic evidence',
+            'Theoretical evidence'
+          ]) {
+            assert.ok(scientific.includes(evidenceClass), `missing evidence class: ${evidenceClass}`);
+          }
+
+          const i18n = fs.readFileSync('docs/I18N_STANDARD.md', 'utf8');
+          for (const status of ['COMPLETE', 'PARTIAL', 'SHELL', 'MISSING', 'REVIEW_REQUIRED']) {
+            assert.ok(i18n.includes(status), `missing i18n status: ${status}`);
+          }
+
+          const pageContract = fs.readFileSync('docs/CONTENT_PAGE_CONTRACT.md', 'utf8');
+          for (const pageType of ['## Molecule contract', '## Supplement contract', '## Biomarker contract']) {
+            assert.ok(pageContract.includes(pageType), `missing page contract: ${pageType}`);
+          }
+
+          const roadmap = fs.readFileSync('docs/ROADMAP.md', 'utf8');
+          for (let phase = 1; phase <= 6; phase += 1) {
+            assert.ok(roadmap.includes(`## Phase ${phase} `), `missing roadmap phase ${phase}`);
+          }
+
+          console.log(`Validated ${requiredFiles.length} governance files and ${roles.length} role contracts.`);
+          JS
+
       - name: Check JavaScript syntax
         run: find assets -name '*.js' -print0 | xargs -0 -n1 node --check
 
