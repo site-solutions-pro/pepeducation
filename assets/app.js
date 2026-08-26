@@ -8,6 +8,7 @@
   const locale = pathSegments[0] === 'pt' || pathSegments[0] === 'es' ? pathSegments[0] : 'en';
   const contentSegments = locale === 'en' ? pathSegments : pathSegments.slice(1);
   const contentPath = contentSegments.length ? contentSegments.join('/') : 'index.html';
+  const languageGlobe = '<svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9S14.4 18.5 12 21M12 3C9.6 5.5 8.4 8.5 8.4 12S9.6 18.5 12 21"></path></svg>';
 
   const pageHref = (page, targetLocale = locale) => {
     const localePrefix = targetLocale === 'en' ? '' : `${targetLocale}/`;
@@ -76,7 +77,7 @@
       <div class="header-actions">
         <div class="language-menu" data-language-menu>
           <button class="language-button" type="button" aria-expanded="false" aria-haspopup="true" aria-label="${labels.language}">
-            <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9S14.4 18.5 12 21M12 3C9.6 5.5 8.4 8.5 8.4 12S9.6 18.5 12 21"></path></svg>
+            ${languageGlobe}
             <span>${locale.toUpperCase()}</span><span aria-hidden="true">▾</span>
           </button>
           <div class="language-dropdown" role="menu" hidden>
