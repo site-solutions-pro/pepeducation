@@ -33,6 +33,8 @@ Homepage and hub identities use their corresponding directory/index paths.
 
 Status describes the localized variant, not the scientific evidence level.
 
+`data/content-manifest.json` is the authoritative inventory of expected locale routes and current translation statuses. The SEO & i18n Agent must read its route, locale-status, `seo_review`, and `i18n_review` fields before locale work and update them when approved work materially changes a page or its readiness.
+
 ## Content identity
 
 Equivalent pages must represent the same molecule, supplement, biomarker, hub, comparison, or research topic. Localized slugs may differ only through an explicit URL strategy; the current default is identity-preserving paths.

@@ -51,6 +51,8 @@ Exit criteria: approved URL strategy, no unhandled legacy URLs, strict-page SEO 
 
 Objective: make EN, PT-BR, and ES variants explicit, identity-preserving, and reviewable.
 
+Enabling component: Content Manifest v1 provides the identity, locale-route, status, review, and priority inventory used to plan and measure this phase.
+
 - [ ] Create a content-identity matrix for all public pages.
 - [ ] Assign `COMPLETE`, `PARTIAL`, `SHELL`, `MISSING`, or `REVIEW_REQUIRED` to every locale variant.
 - [ ] Correct same-locale navigation and CTA routing across PT-BR and ES.
@@ -66,6 +68,8 @@ Exit criteria: complete identity matrix, no accidental locale escapes, reciproca
 
 Objective: reduce duplicated HTML and metadata while preserving the static deployment and every approved public URL.
 
+Enabling component: Content Manifest v1 supplies stable content identities and filesystem/sitemap parity contracts for incremental template and structured-data migration.
+
 - [ ] Inventory duplicated headers, navigation, footers, metadata, JSON-LD, and page sections.
 - [ ] Approve a content/data separation strategy compatible with GitHub Pages.
 - [ ] Define machine-readable page manifests based on `CONTENT_PAGE_CONTRACT.md`.
@@ -80,6 +84,8 @@ Exit criteria: approved reusable system, deterministic validation, preserved pub
 ## Phase 5 — Scientific content scaling
 
 Objective: scale to 100+ high-quality molecule, supplement, and biomarker identities without flattening evidence or review quality.
+
+Enabling component: Content Manifest v1 supplies the governed backlog, locale readiness, content type, and review fields needed to scale without treating file existence as publication approval.
 
 - [ ] Approve taxonomy and priority backlog across molecules, supplements, and biomarkers.
 - [ ] Implement machine-readable evidence and review states.

@@ -51,6 +51,8 @@ owner_or_reviewer: value | REVIEW_REQUIRED
 
 This schema is a contract, not a requirement to add visible YAML or new meta tags to legacy pages in v1.
 
+`data/content-manifest.json` records family-level routes, locale status, discovery, priority, and review requirements. The manifest must reference this canonical contract for classification rather than copying its field-level checklists. Approved work that materially changes a page or its readiness must update the manifest and status report in the same pull request.
+
 ## Common publication checklist
 
 ### Identity and SEO

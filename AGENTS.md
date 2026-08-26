@@ -207,3 +207,21 @@ Every PR must report:
 - Required human approvals.
 
 Completion requires a focused diff, green required checks, independent review evidence, and a clear statement that merge remains a human decision.
+
+## 13. Content manifest
+
+`data/content-manifest.json` is the machine-readable inventory of public WellMax content identities and their EN, PT-BR, and ES variants. `docs/CONTENT_MANIFEST_STANDARD.md` defines its schema, controlled values, classification rules, discovery semantics, and approval boundary. `docs/CONTENT_STATUS_REPORT.md` is the human-readable snapshot generated from that inventory.
+
+Before any large content, translation, SEO, or release mission:
+
+- The WellMax Supervisor reads the manifest and uses its identities, routes, status, priority, and review fields to bound the mission.
+- The Scientific Content Agent reads `scientific_review`, type, locale status, and notes before changing scientific pages.
+- The SEO and i18n Agent reads route, locale status, sitemap, linked, `seo_review`, and `i18n_review` fields before metadata, routing, or translation work.
+- The QA Agent independently validates manifest JSON, enums, route resolution, filesystem parity, sitemap parity, locale prefixes, shell classification, and discovery booleans.
+- Every agent updates the manifest and status report whenever its approved work creates, deletes, moves, translates, materially changes, or changes the readiness status of a public page.
+
+Agents may record `REVIEW_REQUIRED` or a justified `N/A`. Agents must never assign `HUMAN_APPROVED` to their own scientific, safety, regulatory, SEO, or translation work. Manifest status does not replace independent QA, qualified review, passing CI, Supervisor handoff, or human merge approval.
+
+The required handoff for manifest-governed work is:
+
+`BUILD -> QA -> SEO/I18N -> SUPERVISOR -> HUMAN MERGE`
