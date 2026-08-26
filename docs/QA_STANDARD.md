@@ -1,5 +1,7 @@
 # WellMax QA Standard
 
+<!-- Agent System synchronization with the current production baseline was verified on 2026-08-26. -->
+
 ## Independence
 
 The QA Agent is conceptually independent from the implementation role. A builder may report local checks but cannot declare its own work production-ready. QA must inspect the diff and reproduce risk-relevant checks as a separate pass.
